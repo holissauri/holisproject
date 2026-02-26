@@ -29,6 +29,17 @@ const emptyBannerForm = {
   active: true,
 };
 
+const IMAGE_MAX_SIZE_MB = 5;
+const IMAGE_MAX_BYTES = IMAGE_MAX_SIZE_MB * 1024 * 1024;
+
+const readFileAsDataUrl = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result || ""));
+    reader.onerror = () => reject(new Error("Failed to read file"));
+    reader.readAsDataURL(file);
+  });
+
 function RestaurantAdmin() {
   const [products, setProducts] = useState(DEFAULT_PRODUCTS);
   const [banners, setBanners] = useState(DEFAULT_BANNERS);
@@ -63,6 +74,50 @@ function RestaurantAdmin() {
     () => banners.filter((banner) => banner.active).length,
     [banners],
   );
+
+  const handleProductImageUpload = async (event) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+
+    if (!file) {
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      window.alert("画像ファイルを選択してください。");
+      return;
+    }
+
+    if (file.size > IMAGE_MAX_BYTES) {
+      window.alert(`画像サイズは ${IMAGE_MAX_SIZE_MB}MB 以下にしてください。`);
+      return;
+    }
+
+    try {
+      const dataUrl = await readFileAsDataUrl(file);
+      setProductForm((previous) => ({
+        ...previous,
+        imageUrl: dataUrl,
+      }));
+    } catch {
+      window.alert("画像の読み込みに失敗しました。");
+    }
+  };
+
+  const clearProductImageInForm = () => {
+    setProductForm((previous) => ({
+      ...previous,
+      imageUrl: "",
+    }));
+  };
+
+  const clearProductImageById = (productId) => {
+    setProducts((previous) =>
+      previous.map((item) =>
+        item.id === productId ? { ...item, imageUrl: "" } : item,
+      ),
+    );
+  };
 
   const handleProductSubmit = (event) => {
     event.preventDefault();
@@ -239,7 +294,7 @@ function RestaurantAdmin() {
               required
             />
             <input
-              placeholder="画像リンク"
+              placeholder="画像URL"
               value={productForm.imageUrl}
               onChange={(event) =>
                 setProductForm((previous) => ({
@@ -248,6 +303,30 @@ function RestaurantAdmin() {
                 }))
               }
             />
+
+            <div className="azuma-image-tools">
+              <p>商品画像の管理</p>
+              <div className="azuma-upload-row">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleProductImageUpload}
+                  className="azuma-upload-input"
+                />
+                <button type="button" className="ghost" onClick={clearProductImageInForm}>
+                  画像を削除
+                </button>
+              </div>
+              <div className="azuma-thumb-preview">
+                {productForm.imageUrl ? (
+                  <img src={productForm.imageUrl} alt="商品画像プレビュー" className="azuma-thumb" />
+                ) : (
+                  <div className="azuma-thumb-placeholder">画像なし</div>
+                )}
+              </div>
+              <small>URL入力またはファイル選択で画像を追加・変更できます（最大5MB）。</small>
+            </div>
+
             <div className="azuma-check-row">
               <label>
                 <input
@@ -300,18 +379,34 @@ function RestaurantAdmin() {
             {products.length === 0 && <p>商品はまだありません。</p>}
             {products.map((product) => (
               <article key={product.id}>
-                <div>
-                  <h3>{product.name}</h3>
-                  <p>{`${product.category} | ￥${product.price}`}</p>
-                  <p>{product.description || "説明なし。"}</p>
-                  <small>
-                    {product.recommended ? "おすすめ" : "非表示"} |{" "}
-                    {product.bestSeller ? "人気メニュー" : "通常メニュー"}
-                  </small>
+                <div className="azuma-list-body">
+                  <div className="azuma-list-media">
+                    {product.imageUrl ? (
+                      <img src={product.imageUrl} alt={product.name} />
+                    ) : (
+                      <div className="azuma-thumb-placeholder">画像なし</div>
+                    )}
+                  </div>
+                  <div>
+                    <h3>{product.name}</h3>
+                    <p>{`${product.category} | ¥${Number(product.price).toLocaleString("ja-JP")}`}</p>
+                    <p>{product.description || "説明なし。"}</p>
+                    <small>
+                      {product.recommended ? "おすすめ" : "非表示"} |{" "}
+                      {product.bestSeller ? "人気メニュー" : "通常メニュー"}
+                    </small>
+                  </div>
                 </div>
                 <div className="azuma-inline-actions">
                   <button type="button" onClick={() => handleProductEdit(product)}>
                     編集
+                  </button>
+                  <button
+                    type="button"
+                    className="warn"
+                    onClick={() => clearProductImageById(product.id)}
+                  >
+                    画像削除
                   </button>
                   <button
                     type="button"
@@ -358,7 +453,7 @@ function RestaurantAdmin() {
               rows={3}
             />
             <input
-              placeholder="バナー画像リンク"
+              placeholder="バナー画像URL"
               value={bannerForm.imageUrl}
               onChange={(event) =>
                 setBannerForm((previous) => ({

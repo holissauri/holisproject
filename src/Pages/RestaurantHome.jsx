@@ -15,10 +15,21 @@ const yenFormatter = new Intl.NumberFormat("ja-JP", {
   maximumFractionDigits: 0,
 });
 
+const PRODUCT_FALLBACK_IMAGE =
+  "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80";
+
 const ProductCard = ({ product, badgeLabel }) => (
   <article className="azuma-card">
     <div className="azuma-card-image-wrap">
-      <img src={product.imageUrl} alt={product.name} className="azuma-card-image" />
+      <img
+        src={product.imageUrl || PRODUCT_FALLBACK_IMAGE}
+        alt={product.name}
+        className="azuma-card-image"
+        onError={(event) => {
+          event.currentTarget.onerror = null;
+          event.currentTarget.src = PRODUCT_FALLBACK_IMAGE;
+        }}
+      />
       <span className="azuma-card-badge">{badgeLabel}</span>
     </div>
     <div className="azuma-card-content">
@@ -109,9 +120,7 @@ function RestaurantHome() {
           <p>{currentBanner.subtitle}</p>
           <div className="azuma-hero-actions">
             <a href={currentBanner.ctaLink}>{currentBanner.ctaText}</a>
-            <a href={`tel:${RESTAURANT_INFO.phone.replace(/-/g, "")}`}>
-              電話する
-            </a>
+            <a href={`tel:${RESTAURANT_INFO.phone.replace(/-/g, "")}`}>電話する</a>
           </div>
         </div>
       </section>
