@@ -111,3 +111,39 @@ To configure Firebase for this project, follow these steps:
 6. **Update `firebase.js` and `firebase-comment.js` Files:**  
    - Replace the `firebaseConfig` content with your Firebase configuration.  
 
+---
+
+## Admin Access Protection (Restaurant)
+
+The `/admin` route is now protected with Firebase Authentication + admin email allowlist.
+
+### 1. Create environment file
+
+Create `.env` in project root and copy from `.env.example`.
+
+Minimum required:
+
+```bash
+VITE_ADMIN_EMAILS=your-admin-email@example.com
+```
+
+You can add multiple emails separated by commas:
+
+```bash
+VITE_ADMIN_EMAILS=owner@example.com,manager@example.com
+```
+
+Optional: if you want separate Firebase project for admin login, fill all `VITE_ADMIN_FIREBASE_*` values.
+
+### 2. Firebase Console setup
+
+1. Open Firebase Console
+2. Authentication -> Sign-in method
+3. Enable **Email/Password**
+4. Create admin user account(s) in Authentication -> Users
+
+### 3. Route behavior
+
+- `/admin` -> only allowed logged-in admin email can access
+- unauthorized user -> redirected to `/admin-login`
+- homepage admin button points to login when user is not authenticated

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import "./RestaurantSite.css";
+import { useAdminAuth } from "../restaurant/AdminAuthContext";
 import {
   DEFAULT_BANNERS,
   DEFAULT_PRODUCTS,
@@ -29,6 +30,7 @@ const TEXT = {
   navAccess: "\u30a2\u30af\u30bb\u30b9",
   navDetails: "\u5e97\u8217\u8a73\u7d30",
   navAdmin: "\u7ba1\u7406",
+  navAdminLogin: "\u7ba1\u7406\u30ed\u30b0\u30a4\u30f3",
   callNow: "\u96fb\u8a71\u3059\u308b",
   selectBanner: "\u30d0\u30ca\u30fc",
   chefPicks: "\u6599\u7406\u9577\u306e\u304a\u3059\u3059\u3081",
@@ -83,6 +85,7 @@ const ProductCard = ({ product, badgeLabel }) => (
 );
 
 function RestaurantHome() {
+  const { isAllowed } = useAdminAuth();
   const [products, setProducts] = useState(DEFAULT_PRODUCTS);
   const [banners, setBanners] = useState(DEFAULT_BANNERS);
   const [storeDetails, setStoreDetails] = useState(() =>
@@ -151,8 +154,8 @@ function RestaurantHome() {
           <a href="#best-sellers">{TEXT.navBestSellers}</a>
           <a href="#store-details">{TEXT.navDetails}</a>
           <a href="#access">{TEXT.navAccess}</a>
-          <Link to="/admin" className="azuma-admin-link">
-            {TEXT.navAdmin}
+          <Link to={isAllowed ? "/admin" : "/admin-login"} className="azuma-admin-link">
+            {isAllowed ? TEXT.navAdmin : TEXT.navAdminLogin}
           </Link>
         </div>
       </nav>

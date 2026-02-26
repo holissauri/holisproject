@@ -2,9 +2,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useState, lazy, Suspense } from "react";
 import { AnimatePresence } from "framer-motion";
 import "./index.css";
+import { AdminAuthProvider } from "./restaurant/AdminAuthContext";
+import ProtectedAdminRoute from "./restaurant/ProtectedAdminRoute";
 
 const RestaurantHome = lazy(() => import("./Pages/RestaurantHome"));
 const RestaurantAdmin = lazy(() => import("./Pages/RestaurantAdmin"));
+const RestaurantAdminLogin = lazy(() => import("./Pages/RestaurantAdminLogin"));
 const Home = lazy(() => import("./Pages/Home"));
 const About = lazy(() => import("./Pages/About"));
 const AnimatedBackground = lazy(() => import("./components/Background"));
@@ -86,34 +89,46 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Suspense fallback={<PageFallback />}>
-              <RestaurantHome />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <Suspense fallback={<PageFallback />}>
-              <RestaurantAdmin />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/portfolio"
-          element={
-            <LandingPage
-              showWelcome={showWelcome}
-              setShowWelcome={setShowWelcome}
-            />
-          }
-        />
-        <Route path="/project/:id" element={<ProjectPageLayout />} />
-      </Routes>
+      <AdminAuthProvider>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<PageFallback />}>
+                <RestaurantHome />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin-login"
+            element={
+              <Suspense fallback={<PageFallback />}>
+                <RestaurantAdminLogin />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedAdminRoute>
+                <Suspense fallback={<PageFallback />}>
+                  <RestaurantAdmin />
+                </Suspense>
+              </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/portfolio"
+            element={
+              <LandingPage
+                showWelcome={showWelcome}
+                setShowWelcome={setShowWelcome}
+              />
+            }
+          />
+          <Route path="/project/:id" element={<ProjectPageLayout />} />
+        </Routes>
+      </AdminAuthProvider>
     </BrowserRouter>
   );
 }

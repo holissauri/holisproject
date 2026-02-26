@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import "./RestaurantSite.css";
+import { useAdminAuth } from "../restaurant/AdminAuthContext";
 import {
   DEFAULT_BANNERS,
   DEFAULT_PRODUCTS,
@@ -39,6 +40,7 @@ const JP = {
   adminPanel: "\u7ba1\u7406\u30d1\u30cd\u30eb",
   adminTitle: "\u3042\u305a\u307e\u98df\u5802 \u7ba1\u7406\u753b\u9762",
   backToSite: "\u30b5\u30a4\u30c8\u3078\u623b\u308b",
+  logout: "\u30ed\u30b0\u30a2\u30a6\u30c8",
   totalProducts: "\u5546\u54c1\u6570",
   totalBanners: "\u30d0\u30ca\u30fc\u6570",
   activeBanners: "\u516c\u958b\u4e2d\u30d0\u30ca\u30fc",
@@ -126,6 +128,7 @@ const cloneStoreDetails = (sections) =>
   }));
 
 function RestaurantAdmin() {
+  const { logout } = useAdminAuth();
   const [products, setProducts] = useState(DEFAULT_PRODUCTS);
   const [banners, setBanners] = useState(DEFAULT_BANNERS);
   const [storeDetails, setStoreDetails] = useState(DEFAULT_STORE_DETAIL_SECTIONS);
@@ -387,9 +390,14 @@ function RestaurantAdmin() {
           <p>{JP.adminPanel}</p>
           <h1>{JP.adminTitle}</h1>
         </div>
-        <Link to="/" className="azuma-back-link">
-          {JP.backToSite}
-        </Link>
+        <div className="azuma-admin-actions">
+          <button type="button" className="azuma-logout-link" onClick={logout}>
+            {JP.logout}
+          </button>
+          <Link to="/" className="azuma-back-link">
+            {JP.backToSite}
+          </Link>
+        </div>
       </header>
 
       <section className="azuma-admin-stats">
@@ -862,3 +870,5 @@ function RestaurantAdmin() {
 }
 
 export default RestaurantAdmin;
+
+
