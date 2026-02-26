@@ -148,25 +148,25 @@ function RestaurantAdmin() {
     <main className="azuma-site azuma-admin">
       <header className="azuma-admin-top">
         <div>
-          <p>Admin Panel / \u7ba1\u7406\u30d1\u30cd\u30eb</p>
-          <h1>Azuma Shokudo Website</h1>
+          <p>\u7ba1\u7406\u30d1\u30cd\u30eb</p>
+          <h1>\u3042\u305a\u307e\u98df\u5802 \u7ba1\u7406\u753b\u9762</h1>
         </div>
         <Link to="/" className="azuma-back-link">
-          Back to Home
+          \u30b5\u30a4\u30c8\u3078\u623b\u308b
         </Link>
       </header>
 
       <section className="azuma-admin-stats">
         <div>
-          <p>Total Products</p>
+          <p>\u5546\u54c1\u6570</p>
           <strong>{products.length}</strong>
         </div>
         <div>
-          <p>Total Banners</p>
+          <p>\u30d0\u30ca\u30fc\u6570</p>
           <strong>{banners.length}</strong>
         </div>
         <div>
-          <p>Active Banners</p>
+          <p>\u516c\u958b\u4e2d\u30d0\u30ca\u30fc</p>
           <strong>{activeBannerCount}</strong>
         </div>
       </section>
@@ -177,23 +177,23 @@ function RestaurantAdmin() {
           onClick={() => setActivePanel("product")}
           className={activePanel === "product" ? "active" : ""}
         >
-          Product Management
+          \u5546\u54c1\u7ba1\u7406
         </button>
         <button
           type="button"
           onClick={() => setActivePanel("banner")}
           className={activePanel === "banner" ? "active" : ""}
         >
-          Banner Management
+          \u30d0\u30ca\u30fc\u7ba1\u7406
         </button>
       </section>
 
       {activePanel === "product" && (
         <section className="azuma-admin-panel">
           <form className="azuma-form" onSubmit={handleProductSubmit}>
-            <h2>{editingProductId ? "Edit Product" : "Add Product"}</h2>
+            <h2>{editingProductId ? "\u5546\u54c1\u3092\u7de8\u96c6" : "\u5546\u54c1\u3092\u8ffd\u52a0"}</h2>
             <input
-              placeholder="Product name"
+              placeholder="\u5546\u54c1\u540d"
               value={productForm.name}
               onChange={(event) =>
                 setProductForm((previous) => ({
@@ -204,7 +204,7 @@ function RestaurantAdmin() {
               required
             />
             <input
-              placeholder="Category (e.g., Otsumami)"
+              placeholder="\u30ab\u30c6\u30b4\u30ea\uff08\u4f8b\uff1a\u304a\u3064\u307e\u307f\uff09"
               value={productForm.category}
               onChange={(event) =>
                 setProductForm((previous) => ({
@@ -215,7 +215,7 @@ function RestaurantAdmin() {
               required
             />
             <textarea
-              placeholder="Short description"
+              placeholder="\u7c21\u5358\u306a\u8aac\u660e"
               value={productForm.description}
               onChange={(event) =>
                 setProductForm((previous) => ({
@@ -226,7 +226,7 @@ function RestaurantAdmin() {
               rows={3}
             />
             <input
-              placeholder="Price (JPY)"
+              placeholder="\u4fa1\u683c\uff08\u5186\uff09"
               type="number"
               min="0"
               value={productForm.price}
@@ -239,7 +239,7 @@ function RestaurantAdmin() {
               required
             />
             <input
-              placeholder="Image URL"
+              placeholder="\u753b\u50cf\u30ea\u30f3\u30af"
               value={productForm.imageUrl}
               onChange={(event) =>
                 setProductForm((previous) => ({
@@ -260,7 +260,7 @@ function RestaurantAdmin() {
                     }))
                   }
                 />
-                Show in Recommendations
+                \u304a\u3059\u3059\u3081\u306b\u8868\u793a
               </label>
               <label>
                 <input
@@ -273,12 +273,12 @@ function RestaurantAdmin() {
                     }))
                   }
                 />
-                Show in Best Sellers
+                \u4eba\u6c17\u30e1\u30cb\u30e5\u30fc\u306b\u8868\u793a
               </label>
             </div>
             <div className="azuma-form-actions">
               <button type="submit">
-                {editingProductId ? "Save Changes" : "Add Product"}
+                {editingProductId ? "\u5909\u66f4\u3092\u4fdd\u5b58" : "\u5546\u54c1\u3092\u8ffd\u52a0"}
               </button>
               {editingProductId && (
                 <button
@@ -289,29 +289,29 @@ function RestaurantAdmin() {
                     setProductForm(emptyProductForm);
                   }}
                 >
-                  Cancel Edit
+                  \u7de8\u96c6\u3092\u30ad\u30e3\u30f3\u30bb\u30eb
                 </button>
               )}
             </div>
           </form>
 
           <div className="azuma-list">
-            <h2>Product List</h2>
-            {products.length === 0 && <p>No products yet.</p>}
+            <h2>\u5546\u54c1\u4e00\u89a7</h2>
+            {products.length === 0 && <p>\u5546\u54c1\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002</p>}
             {products.map((product) => (
               <article key={product.id}>
                 <div>
                   <h3>{product.name}</h3>
-                  <p>{`${product.category} | JPY ${product.price}`}</p>
-                  <p>{product.description || "No description."}</p>
+                  <p>{`${product.category} | \uFFE5${product.price}`}</p>
+                  <p>{product.description || "\u8aac\u660e\u306a\u3057\u3002"}</p>
                   <small>
-                    {product.recommended ? "Recommended" : "Not Recommended"} |{" "}
-                    {product.bestSeller ? "Best Seller" : "Not Best Seller"}
+                    {product.recommended ? "\u304a\u3059\u3059\u3081" : "\u975e\u8868\u793a"} |{" "}
+                    {product.bestSeller ? "\u4eba\u6c17\u30e1\u30cb\u30e5\u30fc" : "\u901a\u5e38\u30e1\u30cb\u30e5\u30fc"}
                   </small>
                 </div>
                 <div className="azuma-inline-actions">
                   <button type="button" onClick={() => handleProductEdit(product)}>
-                    Edit
+                    \u7de8\u96c6
                   </button>
                   <button
                     type="button"
@@ -322,7 +322,7 @@ function RestaurantAdmin() {
                       )
                     }
                   >
-                    Delete
+                    \u524a\u9664
                   </button>
                 </div>
               </article>
@@ -334,9 +334,9 @@ function RestaurantAdmin() {
       {activePanel === "banner" && (
         <section className="azuma-admin-panel">
           <form className="azuma-form" onSubmit={handleBannerSubmit}>
-            <h2>{editingBannerId ? "Edit Banner" : "Add Banner"}</h2>
+            <h2>{editingBannerId ? "\u30d0\u30ca\u30fc\u3092\u7de8\u96c6" : "\u30d0\u30ca\u30fc\u3092\u8ffd\u52a0"}</h2>
             <input
-              placeholder="Banner title"
+              placeholder="\u30d0\u30ca\u30fc\u30bf\u30a4\u30c8\u30eb"
               value={bannerForm.title}
               onChange={(event) =>
                 setBannerForm((previous) => ({
@@ -347,7 +347,7 @@ function RestaurantAdmin() {
               required
             />
             <textarea
-              placeholder="Subtitle"
+              placeholder="\u30b5\u30d6\u30bf\u30a4\u30c8\u30eb"
               value={bannerForm.subtitle}
               onChange={(event) =>
                 setBannerForm((previous) => ({
@@ -358,7 +358,7 @@ function RestaurantAdmin() {
               rows={3}
             />
             <input
-              placeholder="Banner image URL"
+              placeholder="\u30d0\u30ca\u30fc\u753b\u50cf\u30ea\u30f3\u30af"
               value={bannerForm.imageUrl}
               onChange={(event) =>
                 setBannerForm((previous) => ({
@@ -369,7 +369,7 @@ function RestaurantAdmin() {
               required
             />
             <input
-              placeholder="CTA button text"
+              placeholder="\u30dc\u30bf\u30f3\u6587\u8a00"
               value={bannerForm.ctaText}
               onChange={(event) =>
                 setBannerForm((previous) => ({
@@ -379,7 +379,7 @@ function RestaurantAdmin() {
               }
             />
             <input
-              placeholder="CTA link (e.g., #best-sellers)"
+              placeholder="\u30ea\u30f3\u30af\u5148\uff08\u4f8b\uff1a#best-sellers\uff09"
               value={bannerForm.ctaLink}
               onChange={(event) =>
                 setBannerForm((previous) => ({
@@ -399,11 +399,11 @@ function RestaurantAdmin() {
                   }))
                 }
               />
-              Banner Active
+              \u516c\u958b\u4e2d
             </label>
             <div className="azuma-form-actions">
               <button type="submit">
-                {editingBannerId ? "Save Changes" : "Add Banner"}
+                {editingBannerId ? "\u5909\u66f4\u3092\u4fdd\u5b58" : "\u30d0\u30ca\u30fc\u3092\u8ffd\u52a0"}
               </button>
               {editingBannerId && (
                 <button
@@ -414,25 +414,25 @@ function RestaurantAdmin() {
                     setBannerForm(emptyBannerForm);
                   }}
                 >
-                  Cancel Edit
+                  \u7de8\u96c6\u3092\u30ad\u30e3\u30f3\u30bb\u30eb
                 </button>
               )}
             </div>
           </form>
 
           <div className="azuma-list">
-            <h2>Banner List</h2>
-            {banners.length === 0 && <p>No banners yet.</p>}
+            <h2>\u30d0\u30ca\u30fc\u4e00\u89a7</h2>
+            {banners.length === 0 && <p>\u30d0\u30ca\u30fc\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002</p>}
             {banners.map((banner) => (
               <article key={banner.id}>
                 <div>
                   <h3>{banner.title}</h3>
-                  <p>{banner.subtitle || "No subtitle."}</p>
-                  <small>{banner.active ? "Active" : "Inactive"}</small>
+                  <p>{banner.subtitle || "\u30b5\u30d6\u30bf\u30a4\u30c8\u30eb\u306a\u3057\u3002"}</p>
+                  <small>{banner.active ? "\u516c\u958b\u4e2d" : "\u975e\u516c\u958b"}</small>
                 </div>
                 <div className="azuma-inline-actions">
                   <button type="button" onClick={() => handleBannerEdit(banner)}>
-                    Edit
+                    \u7de8\u96c6
                   </button>
                   <button
                     type="button"
@@ -446,7 +446,7 @@ function RestaurantAdmin() {
                       )
                     }
                   >
-                    {banner.active ? "Deactivate" : "Activate"}
+                    {banner.active ? "\u975e\u516c\u958b\u306b\u3059\u308b" : "\u516c\u958b\u3059\u308b"}
                   </button>
                   <button
                     type="button"
@@ -457,7 +457,7 @@ function RestaurantAdmin() {
                       )
                     }
                   >
-                    Delete
+                    \u524a\u9664
                   </button>
                 </div>
               </article>

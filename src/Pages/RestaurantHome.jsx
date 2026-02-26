@@ -87,12 +87,12 @@ function RestaurantHome() {
           {RESTAURANT_INFO.name}
         </a>
         <div className="azuma-nav-links">
-          <a href="#hero">Hero</a>
-          <a href="#recommendations">Recommendations</a>
-          <a href="#best-sellers">Best Sellers</a>
-          <a href="#access">Access</a>
+          <a href="#hero">\u30db\u30fc\u30e0</a>
+          <a href="#recommendations">\u304a\u3059\u3059\u3081</a>
+          <a href="#best-sellers">\u4eba\u6c17\u30e1\u30cb\u30e5\u30fc</a>
+          <a href="#access">\u30a2\u30af\u30bb\u30b9</a>
           <Link to="/admin" className="azuma-admin-link">
-            Admin
+            \u7ba1\u7406
           </Link>
         </div>
       </nav>
@@ -110,7 +110,7 @@ function RestaurantHome() {
           <div className="azuma-hero-actions">
             <a href={currentBanner.ctaLink}>{currentBanner.ctaText}</a>
             <a href={`tel:${RESTAURANT_INFO.phone.replace(/-/g, "")}`}>
-              Call Now
+              \u96fb\u8a71\u3059\u308b
             </a>
           </div>
         </div>
@@ -124,7 +124,7 @@ function RestaurantHome() {
               className={index === activeBannerIndex ? "active" : ""}
               onClick={() => setActiveBannerIndex(index)}
               type="button"
-              aria-label={`Select banner ${index + 1}`}
+              aria-label={`\u30d0\u30ca\u30fc ${index + 1} \u3092\u9078\u629e`}
             />
           ))}
         </div>
@@ -132,30 +132,30 @@ function RestaurantHome() {
 
       <section className="azuma-section" id="recommendations">
         <div className="azuma-section-head">
-          <p>Chef Picks / \u304a\u3059\u3059\u3081</p>
-          <h2>Recommendations</h2>
+          <p>\u6599\u7406\u9577\u306e\u304a\u3059\u3059\u3081</p>
+          <h2>\u304a\u3059\u3059\u3081</h2>
         </div>
         <div className="azuma-grid">
           {recommendedProducts.length === 0 && (
-            <p className="azuma-empty">No recommended items yet.</p>
+            <p className="azuma-empty">\u304a\u3059\u3059\u3081\u5546\u54c1\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002</p>
           )}
           {recommendedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} badgeLabel="Recommended" />
+            <ProductCard key={product.id} product={product} badgeLabel="\u304a\u3059\u3059\u3081" />
           ))}
         </div>
       </section>
 
       <section className="azuma-section" id="best-sellers">
         <div className="azuma-section-head">
-          <p>Most Popular / \u4eba\u6c17</p>
-          <h2>Best Sellers</h2>
+          <p>\u4eba\u6c17\u30e1\u30cb\u30e5\u30fc</p>
+          <h2>\u30d9\u30b9\u30c8\u30bb\u30e9\u30fc</h2>
         </div>
         <div className="azuma-grid">
           {bestSellerProducts.length === 0 && (
-            <p className="azuma-empty">No best sellers yet.</p>
+            <p className="azuma-empty">\u4eba\u6c17\u30e1\u30cb\u30e5\u30fc\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002</p>
           )}
           {bestSellerProducts.map((product) => (
-            <ProductCard key={product.id} product={product} badgeLabel="Best Seller" />
+            <ProductCard key={product.id} product={product} badgeLabel="\u4eba\u6c17" />
           ))}
         </div>
       </section>
@@ -169,7 +169,7 @@ function RestaurantHome() {
             {RESTAURANT_INFO.phone}
           </a>
           <a href={RESTAURANT_INFO.mapsLink} target="_blank" rel="noopener noreferrer">
-            Open in Google Maps
+            Google\u30de\u30c3\u30d7\u3067\u958b\u304f
           </a>
         </div>
       </section>
