@@ -1,0 +1,21 @@
+<svg width="1200" height="850" viewBox="0 0 1200 850" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#312e81" />
+    </linearGradient>
+    <linearGradient id="line2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="850" rx="28" fill="url(#bg2)" />
+  <rect x="58" y="58" width="1084" height="734" rx="24" fill="none" stroke="url(#line2)" stroke-width="4" />
+  <text x="600" y="230" text-anchor="middle" fill="#e5e7eb" font-size="54" font-family="Segoe UI, Arial, sans-serif" font-weight="700">AI Certificate</text>
+  <text x="600" y="295" text-anchor="middle" fill="#9ca3af" font-size="30" font-family="Segoe UI, Arial, sans-serif">Deep Learning Specialization</text>
+  <rect x="300" y="352" width="600" height="8" rx="4" fill="url(#line2)" />
+  <text x="600" y="450" text-anchor="middle" fill="#d1d5db" font-size="34" font-family="Segoe UI, Arial, sans-serif">Issued To: Holis Sindy Sauri</text>
+  <text x="600" y="520" text-anchor="middle" fill="#9ca3af" font-size="24" font-family="Segoe UI, Arial, sans-serif">Portfolio Placeholder Certificate</text>
+  <path d="M175 680h180v42H175z" fill="#34d399" fill-opacity="0.3" />
+  <path d="M845 145h180v42H845z" fill="#60a5fa" fill-opacity="0.28" />
+</svg>

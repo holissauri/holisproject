@@ -1,0 +1,581 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;700;800&display=swap");
+
+.azuma-site {
+  --azuma-ink: #1f2329;
+  --azuma-ink-soft: #4d5056;
+  --azuma-paper: #f4ead7;
+  --azuma-accent: #c88a2d;
+  --azuma-accent-dark: #8c5e16;
+  --azuma-red: #e14b3b;
+  --azuma-navy: #0e1320;
+  --azuma-line: rgba(31, 35, 41, 0.15);
+  --azuma-shadow: 0 18px 45px rgba(14, 19, 32, 0.15);
+  color: var(--azuma-ink);
+  background:
+    radial-gradient(circle at 12% 5%, rgba(200, 138, 45, 0.18), transparent 28%),
+    radial-gradient(circle at 90% 10%, rgba(225, 75, 59, 0.16), transparent 24%),
+    var(--azuma-paper);
+  min-height: 100vh;
+}
+
+.azuma-site,
+.azuma-site * {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.azuma-site h1,
+.azuma-site h2,
+.azuma-site h3,
+.azuma-site .azuma-brand {
+  font-family: "Shippori Mincho", serif;
+}
+
+.azuma-nav {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 6vw;
+  background: rgba(14, 19, 32, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.azuma-brand {
+  color: #fdf8ef;
+  text-decoration: none;
+  font-size: clamp(1.1rem, 1vw + 1rem, 1.5rem);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.azuma-brand span {
+  font-size: 0.95rem;
+  opacity: 0.72;
+  margin-right: 0.35rem;
+}
+
+.azuma-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.azuma-nav-links a {
+  color: rgba(252, 244, 228, 0.9);
+  text-decoration: none;
+  font-size: 0.92rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+}
+
+.azuma-nav-links a:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.azuma-admin-link {
+  background: var(--azuma-accent);
+  color: var(--azuma-navy) !important;
+  font-weight: 700;
+}
+
+.azuma-hero {
+  position: relative;
+  width: min(1280px, 92vw);
+  min-height: clamp(360px, 58vw, 560px);
+  border-radius: 24px;
+  overflow: hidden;
+  margin: 2.4rem auto 0.6rem;
+  display: flex;
+  align-items: flex-end;
+  background-size: cover;
+  background-position: center;
+  box-shadow: var(--azuma-shadow);
+}
+
+.azuma-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      130deg,
+      rgba(14, 19, 32, 0.9),
+      rgba(14, 19, 32, 0.43) 55%,
+      rgba(14, 19, 32, 0.7)
+    );
+}
+
+.azuma-hero-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(1.4rem, 2.1vw, 2.4rem);
+  max-width: 620px;
+  color: #fffefb;
+}
+
+.azuma-kicker {
+  display: inline-flex;
+  padding: 0.3rem 0.7rem;
+  margin-bottom: 0.7rem;
+  border-radius: 999px;
+  background: rgba(200, 138, 45, 0.2);
+  border: 1px solid rgba(200, 138, 45, 0.6);
+  font-size: 0.84rem;
+}
+
+.azuma-hero h1 {
+  font-size: clamp(1.7rem, 2.6vw, 3.2rem);
+  line-height: 1.1;
+  margin-bottom: 0.9rem;
+}
+
+.azuma-hero p {
+  max-width: 54ch;
+  opacity: 0.95;
+}
+
+.azuma-hero-actions {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.azuma-hero-actions a {
+  text-decoration: none;
+  padding: 0.7rem 1.1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.93rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.azuma-hero-actions a:first-child {
+  color: var(--azuma-navy);
+  background: var(--azuma-accent);
+}
+
+.azuma-hero-actions a:last-child {
+  color: #fffefb;
+  background: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.azuma-hero-actions a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.26);
+}
+
+.azuma-banner-dots {
+  width: min(1280px, 92vw);
+  margin: 0 auto 1.6rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.azuma-banner-dots button {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  border: 0;
+  background: rgba(14, 19, 32, 0.25);
+  cursor: pointer;
+}
+
+.azuma-banner-dots button.active {
+  width: 28px;
+  background: var(--azuma-red);
+}
+
+.azuma-section {
+  width: min(1280px, 92vw);
+  margin: 0 auto;
+  padding: 2.4rem 0 1.1rem;
+}
+
+.azuma-section-head p {
+  color: var(--azuma-red);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.azuma-section-head h2 {
+  font-size: clamp(1.35rem, 2.2vw, 2.35rem);
+  margin-top: 0.25rem;
+}
+
+.azuma-grid {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.azuma-card {
+  border: 1px solid var(--azuma-line);
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 10px 24px rgba(31, 35, 41, 0.07);
+}
+
+.azuma-card-image-wrap {
+  position: relative;
+  height: 172px;
+  overflow: hidden;
+}
+
+.azuma-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.azuma-card-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 0.24rem 0.56rem;
+  border-radius: 999px;
+  background: rgba(14, 19, 32, 0.92);
+  color: #fff;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+}
+
+.azuma-card-content {
+  padding: 0.95rem;
+}
+
+.azuma-card-category {
+  color: var(--azuma-accent-dark);
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+}
+
+.azuma-card-content h3 {
+  margin-top: 0.25rem;
+  font-size: 1.1rem;
+}
+
+.azuma-card-content p {
+  margin-top: 0.45rem;
+  color: var(--azuma-ink-soft);
+  font-size: 0.91rem;
+  line-height: 1.45;
+}
+
+.azuma-card-content strong {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: var(--azuma-red);
+  font-size: 1rem;
+}
+
+.azuma-empty {
+  color: var(--azuma-ink-soft);
+  border: 1px dashed var(--azuma-line);
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.azuma-contact {
+  width: min(1280px, 92vw);
+  margin: 2.6rem auto 0;
+  border-radius: 24px 24px 0 0;
+  padding: 2.2rem 1.3rem 2.6rem;
+  background:
+    linear-gradient(140deg, rgba(14, 19, 32, 0.98), rgba(22, 30, 51, 0.95)),
+    var(--azuma-navy);
+  color: #fef5e7;
+  text-align: center;
+}
+
+.azuma-contact h2 {
+  font-size: clamp(1.45rem, 1.7vw, 2.1rem);
+}
+
+.azuma-contact p {
+  margin-top: 0.45rem;
+  opacity: 0.9;
+}
+
+.azuma-contact-actions {
+  margin-top: 1.1rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.azuma-contact-actions a {
+  color: #0e1320;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 0.66rem 1rem;
+  border-radius: 10px;
+  background: #fef5e7;
+}
+
+.azuma-contact-actions a:last-child {
+  color: #fffefb;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+}
+
+.azuma-admin {
+  padding: 1.5rem 0 2.5rem;
+}
+
+.azuma-admin-top {
+  width: min(1280px, 92vw);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 18px;
+  background: rgba(14, 19, 32, 0.95);
+  color: #fff;
+}
+
+.azuma-admin-top p {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.azuma-admin-top h1 {
+  font-size: clamp(1.2rem, 1.8vw, 2rem);
+}
+
+.azuma-back-link {
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--azuma-navy);
+  background: var(--azuma-accent);
+  padding: 0.62rem 0.9rem;
+  border-radius: 10px;
+}
+
+.azuma-admin-stats {
+  width: min(1280px, 92vw);
+  margin: 1rem auto 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.azuma-admin-stats div {
+  border-radius: 14px;
+  padding: 1rem;
+  border: 1px solid var(--azuma-line);
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.azuma-admin-stats p {
+  color: var(--azuma-ink-soft);
+  font-size: 0.84rem;
+}
+
+.azuma-admin-stats strong {
+  font-size: 1.5rem;
+  color: var(--azuma-accent-dark);
+}
+
+.azuma-admin-switcher {
+  width: min(1280px, 92vw);
+  margin: 1rem auto 0;
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.azuma-admin-switcher button {
+  border: 1px solid var(--azuma-line);
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  background: rgba(255, 255, 255, 0.76);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.azuma-admin-switcher button.active {
+  background: var(--azuma-navy);
+  color: #fff;
+  border-color: transparent;
+}
+
+.azuma-admin-panel {
+  width: min(1280px, 92vw);
+  margin: 1rem auto 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1.3fr;
+}
+
+.azuma-form,
+.azuma-list {
+  border-radius: 18px;
+  padding: 1rem;
+  border: 1px solid var(--azuma-line);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.azuma-form h2,
+.azuma-list h2 {
+  font-size: 1.2rem;
+}
+
+.azuma-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.azuma-form input,
+.azuma-form textarea {
+  border: 1px solid rgba(31, 35, 41, 0.28);
+  border-radius: 10px;
+  padding: 0.64rem 0.7rem;
+  outline: none;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.azuma-form input:focus,
+.azuma-form textarea:focus {
+  border-color: var(--azuma-accent-dark);
+  box-shadow: 0 0 0 3px rgba(200, 138, 45, 0.18);
+}
+
+.azuma-check-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+}
+
+.azuma-check-row label,
+.azuma-single-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.azuma-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.azuma-form-actions button,
+.azuma-inline-actions button {
+  border: 0;
+  cursor: pointer;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 0.58rem 0.88rem;
+}
+
+.azuma-form-actions button {
+  background: var(--azuma-accent);
+  color: var(--azuma-navy);
+}
+
+.azuma-form-actions button.ghost {
+  border: 1px solid var(--azuma-line);
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--azuma-ink);
+}
+
+.azuma-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.azuma-list article {
+  border: 1px solid var(--azuma-line);
+  border-radius: 12px;
+  padding: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.8rem;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.azuma-list h3 {
+  font-size: 1.05rem;
+}
+
+.azuma-list p {
+  margin-top: 0.2rem;
+  font-size: 0.9rem;
+  color: var(--azuma-ink-soft);
+}
+
+.azuma-list small {
+  display: inline-block;
+  margin-top: 0.3rem;
+  font-size: 0.78rem;
+  color: var(--azuma-accent-dark);
+  font-weight: 700;
+}
+
+.azuma-inline-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.azuma-inline-actions button {
+  background: rgba(14, 19, 32, 0.9);
+  color: #fff;
+}
+
+.azuma-inline-actions button.danger {
+  background: #8f2f28;
+}
+
+@media (max-width: 980px) {
+  .azuma-admin-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .azuma-nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .azuma-nav-links {
+    justify-content: flex-start;
+  }
+
+  .azuma-hero {
+    min-height: 380px;
+  }
+
+  .azuma-list article {
+    flex-direction: column;
+  }
+
+  .azuma-inline-actions {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

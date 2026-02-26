@@ -1,0 +1,21 @@
+<svg width="1200" height="850" viewBox="0 0 1200 850" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1120" />
+      <stop offset="100%" stop-color="#1f2937" />
+    </linearGradient>
+    <linearGradient id="line3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="850" rx="28" fill="url(#bg3)" />
+  <rect x="54" y="54" width="1092" height="742" rx="24" fill="none" stroke="url(#line3)" stroke-width="4" />
+  <text x="600" y="236" text-anchor="middle" fill="#f3f4f6" font-size="54" font-family="Segoe UI, Arial, sans-serif" font-weight="700">AI Certificate</text>
+  <text x="600" y="302" text-anchor="middle" fill="#d1d5db" font-size="30" font-family="Segoe UI, Arial, sans-serif">Generative AI &amp; LLM Engineering</text>
+  <rect x="270" y="360" width="660" height="8" rx="4" fill="url(#line3)" />
+  <text x="600" y="458" text-anchor="middle" fill="#f3f4f6" font-size="34" font-family="Segoe UI, Arial, sans-serif">Issued To: Holis Sindy Sauri</text>
+  <text x="600" y="526" text-anchor="middle" fill="#9ca3af" font-size="24" font-family="Segoe UI, Arial, sans-serif">Portfolio Placeholder Certificate</text>
+  <circle cx="170" cy="180" r="52" fill="#f59e0b" fill-opacity="0.25" />
+  <circle cx="1035" cy="690" r="64" fill="#ec4899" fill-opacity="0.22" />
+</svg>
