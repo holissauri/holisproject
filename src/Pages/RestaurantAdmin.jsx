@@ -148,25 +148,25 @@ function RestaurantAdmin() {
     <main className="azuma-site azuma-admin">
       <header className="azuma-admin-top">
         <div>
-          <p>\u7ba1\u7406\u30d1\u30cd\u30eb</p>
-          <h1>\u3042\u305a\u307e\u98df\u5802 \u7ba1\u7406\u753b\u9762</h1>
+          <p>管理パネル</p>
+          <h1>あずま食堂 管理画面</h1>
         </div>
         <Link to="/" className="azuma-back-link">
-          \u30b5\u30a4\u30c8\u3078\u623b\u308b
+          サイトへ戻る
         </Link>
       </header>
 
       <section className="azuma-admin-stats">
         <div>
-          <p>\u5546\u54c1\u6570</p>
+          <p>商品数</p>
           <strong>{products.length}</strong>
         </div>
         <div>
-          <p>\u30d0\u30ca\u30fc\u6570</p>
+          <p>バナー数</p>
           <strong>{banners.length}</strong>
         </div>
         <div>
-          <p>\u516c\u958b\u4e2d\u30d0\u30ca\u30fc</p>
+          <p>公開中バナー</p>
           <strong>{activeBannerCount}</strong>
         </div>
       </section>
@@ -177,23 +177,23 @@ function RestaurantAdmin() {
           onClick={() => setActivePanel("product")}
           className={activePanel === "product" ? "active" : ""}
         >
-          \u5546\u54c1\u7ba1\u7406
+          商品管理
         </button>
         <button
           type="button"
           onClick={() => setActivePanel("banner")}
           className={activePanel === "banner" ? "active" : ""}
         >
-          \u30d0\u30ca\u30fc\u7ba1\u7406
+          バナー管理
         </button>
       </section>
 
       {activePanel === "product" && (
         <section className="azuma-admin-panel">
           <form className="azuma-form" onSubmit={handleProductSubmit}>
-            <h2>{editingProductId ? "\u5546\u54c1\u3092\u7de8\u96c6" : "\u5546\u54c1\u3092\u8ffd\u52a0"}</h2>
+            <h2>{editingProductId ? "商品を編集" : "商品を追加"}</h2>
             <input
-              placeholder="\u5546\u54c1\u540d"
+              placeholder="商品名"
               value={productForm.name}
               onChange={(event) =>
                 setProductForm((previous) => ({
@@ -204,7 +204,7 @@ function RestaurantAdmin() {
               required
             />
             <input
-              placeholder="\u30ab\u30c6\u30b4\u30ea\uff08\u4f8b\uff1a\u304a\u3064\u307e\u307f\uff09"
+              placeholder="カテゴリ（例：おつまみ）"
               value={productForm.category}
               onChange={(event) =>
                 setProductForm((previous) => ({
@@ -215,7 +215,7 @@ function RestaurantAdmin() {
               required
             />
             <textarea
-              placeholder="\u7c21\u5358\u306a\u8aac\u660e"
+              placeholder="簡単な説明"
               value={productForm.description}
               onChange={(event) =>
                 setProductForm((previous) => ({
@@ -226,7 +226,7 @@ function RestaurantAdmin() {
               rows={3}
             />
             <input
-              placeholder="\u4fa1\u683c\uff08\u5186\uff09"
+              placeholder="価格（円）"
               type="number"
               min="0"
               value={productForm.price}
@@ -239,7 +239,7 @@ function RestaurantAdmin() {
               required
             />
             <input
-              placeholder="\u753b\u50cf\u30ea\u30f3\u30af"
+              placeholder="画像リンク"
               value={productForm.imageUrl}
               onChange={(event) =>
                 setProductForm((previous) => ({
@@ -260,7 +260,7 @@ function RestaurantAdmin() {
                     }))
                   }
                 />
-                \u304a\u3059\u3059\u3081\u306b\u8868\u793a
+                おすすめに表示
               </label>
               <label>
                 <input
@@ -273,12 +273,12 @@ function RestaurantAdmin() {
                     }))
                   }
                 />
-                \u4eba\u6c17\u30e1\u30cb\u30e5\u30fc\u306b\u8868\u793a
+                人気メニューに表示
               </label>
             </div>
             <div className="azuma-form-actions">
               <button type="submit">
-                {editingProductId ? "\u5909\u66f4\u3092\u4fdd\u5b58" : "\u5546\u54c1\u3092\u8ffd\u52a0"}
+                {editingProductId ? "変更を保存" : "商品を追加"}
               </button>
               {editingProductId && (
                 <button
@@ -289,29 +289,29 @@ function RestaurantAdmin() {
                     setProductForm(emptyProductForm);
                   }}
                 >
-                  \u7de8\u96c6\u3092\u30ad\u30e3\u30f3\u30bb\u30eb
+                  編集をキャンセル
                 </button>
               )}
             </div>
           </form>
 
           <div className="azuma-list">
-            <h2>\u5546\u54c1\u4e00\u89a7</h2>
-            {products.length === 0 && <p>\u5546\u54c1\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002</p>}
+            <h2>商品一覧</h2>
+            {products.length === 0 && <p>商品はまだありません。</p>}
             {products.map((product) => (
               <article key={product.id}>
                 <div>
                   <h3>{product.name}</h3>
-                  <p>{`${product.category} | \uFFE5${product.price}`}</p>
-                  <p>{product.description || "\u8aac\u660e\u306a\u3057\u3002"}</p>
+                  <p>{`${product.category} | ￥${product.price}`}</p>
+                  <p>{product.description || "説明なし。"}</p>
                   <small>
-                    {product.recommended ? "\u304a\u3059\u3059\u3081" : "\u975e\u8868\u793a"} |{" "}
-                    {product.bestSeller ? "\u4eba\u6c17\u30e1\u30cb\u30e5\u30fc" : "\u901a\u5e38\u30e1\u30cb\u30e5\u30fc"}
+                    {product.recommended ? "おすすめ" : "非表示"} |{" "}
+                    {product.bestSeller ? "人気メニュー" : "通常メニュー"}
                   </small>
                 </div>
                 <div className="azuma-inline-actions">
                   <button type="button" onClick={() => handleProductEdit(product)}>
-                    \u7de8\u96c6
+                    編集
                   </button>
                   <button
                     type="button"
@@ -322,7 +322,7 @@ function RestaurantAdmin() {
                       )
                     }
                   >
-                    \u524a\u9664
+                    削除
                   </button>
                 </div>
               </article>
@@ -334,9 +334,9 @@ function RestaurantAdmin() {
       {activePanel === "banner" && (
         <section className="azuma-admin-panel">
           <form className="azuma-form" onSubmit={handleBannerSubmit}>
-            <h2>{editingBannerId ? "\u30d0\u30ca\u30fc\u3092\u7de8\u96c6" : "\u30d0\u30ca\u30fc\u3092\u8ffd\u52a0"}</h2>
+            <h2>{editingBannerId ? "バナーを編集" : "バナーを追加"}</h2>
             <input
-              placeholder="\u30d0\u30ca\u30fc\u30bf\u30a4\u30c8\u30eb"
+              placeholder="バナータイトル"
               value={bannerForm.title}
               onChange={(event) =>
                 setBannerForm((previous) => ({
@@ -347,7 +347,7 @@ function RestaurantAdmin() {
               required
             />
             <textarea
-              placeholder="\u30b5\u30d6\u30bf\u30a4\u30c8\u30eb"
+              placeholder="サブタイトル"
               value={bannerForm.subtitle}
               onChange={(event) =>
                 setBannerForm((previous) => ({
@@ -358,7 +358,7 @@ function RestaurantAdmin() {
               rows={3}
             />
             <input
-              placeholder="\u30d0\u30ca\u30fc\u753b\u50cf\u30ea\u30f3\u30af"
+              placeholder="バナー画像リンク"
               value={bannerForm.imageUrl}
               onChange={(event) =>
                 setBannerForm((previous) => ({
@@ -369,7 +369,7 @@ function RestaurantAdmin() {
               required
             />
             <input
-              placeholder="\u30dc\u30bf\u30f3\u6587\u8a00"
+              placeholder="ボタン文言"
               value={bannerForm.ctaText}
               onChange={(event) =>
                 setBannerForm((previous) => ({
@@ -379,7 +379,7 @@ function RestaurantAdmin() {
               }
             />
             <input
-              placeholder="\u30ea\u30f3\u30af\u5148\uff08\u4f8b\uff1a#best-sellers\uff09"
+              placeholder="リンク先（例：#best-sellers）"
               value={bannerForm.ctaLink}
               onChange={(event) =>
                 setBannerForm((previous) => ({
@@ -399,11 +399,11 @@ function RestaurantAdmin() {
                   }))
                 }
               />
-              \u516c\u958b\u4e2d
+              公開中
             </label>
             <div className="azuma-form-actions">
               <button type="submit">
-                {editingBannerId ? "\u5909\u66f4\u3092\u4fdd\u5b58" : "\u30d0\u30ca\u30fc\u3092\u8ffd\u52a0"}
+                {editingBannerId ? "変更を保存" : "バナーを追加"}
               </button>
               {editingBannerId && (
                 <button
@@ -414,25 +414,25 @@ function RestaurantAdmin() {
                     setBannerForm(emptyBannerForm);
                   }}
                 >
-                  \u7de8\u96c6\u3092\u30ad\u30e3\u30f3\u30bb\u30eb
+                  編集をキャンセル
                 </button>
               )}
             </div>
           </form>
 
           <div className="azuma-list">
-            <h2>\u30d0\u30ca\u30fc\u4e00\u89a7</h2>
-            {banners.length === 0 && <p>\u30d0\u30ca\u30fc\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002</p>}
+            <h2>バナー一覧</h2>
+            {banners.length === 0 && <p>バナーはまだありません。</p>}
             {banners.map((banner) => (
               <article key={banner.id}>
                 <div>
                   <h3>{banner.title}</h3>
-                  <p>{banner.subtitle || "\u30b5\u30d6\u30bf\u30a4\u30c8\u30eb\u306a\u3057\u3002"}</p>
-                  <small>{banner.active ? "\u516c\u958b\u4e2d" : "\u975e\u516c\u958b"}</small>
+                  <p>{banner.subtitle || "サブタイトルなし。"}</p>
+                  <small>{banner.active ? "公開中" : "非公開"}</small>
                 </div>
                 <div className="azuma-inline-actions">
                   <button type="button" onClick={() => handleBannerEdit(banner)}>
-                    \u7de8\u96c6
+                    編集
                   </button>
                   <button
                     type="button"
@@ -446,7 +446,7 @@ function RestaurantAdmin() {
                       )
                     }
                   >
-                    {banner.active ? "\u975e\u516c\u958b\u306b\u3059\u308b" : "\u516c\u958b\u3059\u308b"}
+                    {banner.active ? "非公開にする" : "公開する"}
                   </button>
                   <button
                     type="button"
@@ -457,7 +457,7 @@ function RestaurantAdmin() {
                       )
                     }
                   >
-                    \u524a\u9664
+                    削除
                   </button>
                 </div>
               </article>

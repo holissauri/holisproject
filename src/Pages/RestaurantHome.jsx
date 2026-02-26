@@ -87,12 +87,12 @@ function RestaurantHome() {
           {RESTAURANT_INFO.name}
         </a>
         <div className="azuma-nav-links">
-          <a href="#hero">\u30db\u30fc\u30e0</a>
-          <a href="#recommendations">\u304a\u3059\u3059\u3081</a>
-          <a href="#best-sellers">\u4eba\u6c17\u30e1\u30cb\u30e5\u30fc</a>
-          <a href="#access">\u30a2\u30af\u30bb\u30b9</a>
+          <a href="#hero">ホーム</a>
+          <a href="#recommendations">おすすめ</a>
+          <a href="#best-sellers">人気メニュー</a>
+          <a href="#access">アクセス</a>
           <Link to="/admin" className="azuma-admin-link">
-            \u7ba1\u7406
+            管理
           </Link>
         </div>
       </nav>
@@ -110,7 +110,7 @@ function RestaurantHome() {
           <div className="azuma-hero-actions">
             <a href={currentBanner.ctaLink}>{currentBanner.ctaText}</a>
             <a href={`tel:${RESTAURANT_INFO.phone.replace(/-/g, "")}`}>
-              \u96fb\u8a71\u3059\u308b
+              電話する
             </a>
           </div>
         </div>
@@ -124,7 +124,7 @@ function RestaurantHome() {
               className={index === activeBannerIndex ? "active" : ""}
               onClick={() => setActiveBannerIndex(index)}
               type="button"
-              aria-label={`\u30d0\u30ca\u30fc ${index + 1} \u3092\u9078\u629e`}
+              aria-label={`バナー ${index + 1} を選択`}
             />
           ))}
         </div>
@@ -132,30 +132,30 @@ function RestaurantHome() {
 
       <section className="azuma-section" id="recommendations">
         <div className="azuma-section-head">
-          <p>\u6599\u7406\u9577\u306e\u304a\u3059\u3059\u3081</p>
-          <h2>\u304a\u3059\u3059\u3081</h2>
+          <p>料理長のおすすめ</p>
+          <h2>おすすめ</h2>
         </div>
         <div className="azuma-grid">
           {recommendedProducts.length === 0 && (
-            <p className="azuma-empty">\u304a\u3059\u3059\u3081\u5546\u54c1\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002</p>
+            <p className="azuma-empty">おすすめ商品はまだありません。</p>
           )}
           {recommendedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} badgeLabel="\u304a\u3059\u3059\u3081" />
+            <ProductCard key={product.id} product={product} badgeLabel="おすすめ" />
           ))}
         </div>
       </section>
 
       <section className="azuma-section" id="best-sellers">
         <div className="azuma-section-head">
-          <p>\u4eba\u6c17\u30e1\u30cb\u30e5\u30fc</p>
-          <h2>\u30d9\u30b9\u30c8\u30bb\u30e9\u30fc</h2>
+          <p>人気メニュー</p>
+          <h2>ベストセラー</h2>
         </div>
         <div className="azuma-grid">
           {bestSellerProducts.length === 0 && (
-            <p className="azuma-empty">\u4eba\u6c17\u30e1\u30cb\u30e5\u30fc\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002</p>
+            <p className="azuma-empty">人気メニューはまだありません。</p>
           )}
           {bestSellerProducts.map((product) => (
-            <ProductCard key={product.id} product={product} badgeLabel="\u4eba\u6c17" />
+            <ProductCard key={product.id} product={product} badgeLabel="人気" />
           ))}
         </div>
       </section>
@@ -169,7 +169,7 @@ function RestaurantHome() {
             {RESTAURANT_INFO.phone}
           </a>
           <a href={RESTAURANT_INFO.mapsLink} target="_blank" rel="noopener noreferrer">
-            Google\u30de\u30c3\u30d7\u3067\u958b\u304f
+            Googleマップで開く
           </a>
         </div>
       </section>
