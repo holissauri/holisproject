@@ -288,6 +288,82 @@
   padding: 1rem;
 }
 
+.azuma-store-details {
+  width: min(1280px, 92vw);
+  margin: 2.4rem auto 0;
+}
+
+.azuma-store-details-inner {
+  border: 1px solid var(--azuma-line);
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 12px 24px rgba(14, 19, 32, 0.08);
+}
+
+.azuma-store-details-inner > h2 {
+  margin: 0;
+  padding: 1.25rem 1.4rem;
+  font-size: clamp(1.15rem, 1.7vw, 1.85rem);
+  border-bottom: 1px solid var(--azuma-line);
+  background: rgba(248, 244, 235, 0.92);
+}
+
+.azuma-detail-group + .azuma-detail-group {
+  border-top: 1px solid var(--azuma-line);
+}
+
+.azuma-detail-group-title {
+  margin: 0;
+  padding: 0.95rem 1.4rem;
+  border-left: 4px solid var(--azuma-accent);
+  background: rgba(252, 249, 241, 0.92);
+  font-size: 1.05rem;
+}
+
+.azuma-detail-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  border-top: 1px solid rgba(31, 35, 41, 0.12);
+}
+
+.azuma-detail-label {
+  padding: 0.95rem 1rem;
+  background: rgba(31, 35, 41, 0.05);
+  border-right: 1px solid rgba(31, 35, 41, 0.08);
+  font-weight: 700;
+}
+
+.azuma-detail-value {
+  padding: 0.95rem 1.1rem;
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.azuma-detail-value p {
+  margin: 0;
+  line-height: 1.65;
+  color: var(--azuma-ink-soft);
+}
+
+.azuma-detail-value p + p {
+  margin-top: 0.28rem;
+}
+
+.azuma-map-embed-wrap {
+  margin-top: 0.75rem;
+  max-width: 640px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--azuma-line);
+}
+
+.azuma-map-embed-wrap iframe {
+  width: 100%;
+  height: 220px;
+  border: 0;
+  display: block;
+}
+
 .azuma-contact {
   width: min(1280px, 92vw);
   margin: 2.6rem auto 0;
@@ -642,6 +718,21 @@
 
   .azuma-hero {
     min-height: 380px;
+  }
+
+  .azuma-store-details-inner > h2,
+  .azuma-detail-group-title {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .azuma-detail-row {
+    grid-template-columns: 1fr;
+  }
+
+  .azuma-detail-label {
+    border-right: 0;
+    border-bottom: 1px solid rgba(31, 35, 41, 0.08);
   }
 
   .azuma-list article {
