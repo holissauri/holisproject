@@ -17,6 +17,27 @@ const yenFormatter = new Intl.NumberFormat("ja-JP", {
 
 const PRODUCT_FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80";
+const BANNER_FALLBACK_IMAGE =
+  "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1400&q=80";
+
+const TEXT = {
+  navHome: "\u30db\u30fc\u30e0",
+  navRecommendations: "\u304a\u3059\u3059\u3081",
+  navBestSellers: "\u4eba\u6c17\u30e1\u30cb\u30e5\u30fc",
+  navAccess: "\u30a2\u30af\u30bb\u30b9",
+  navAdmin: "\u7ba1\u7406",
+  callNow: "\u96fb\u8a71\u3059\u308b",
+  selectBanner: "\u30d0\u30ca\u30fc",
+  chefPicks: "\u6599\u7406\u9577\u306e\u304a\u3059\u3059\u3081",
+  recommendations: "\u304a\u3059\u3059\u3081",
+  noRecommendations: "\u304a\u3059\u3059\u3081\u5546\u54c1\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002",
+  mostPopular: "\u4eba\u6c17\u30e1\u30cb\u30e5\u30fc",
+  bestSellers: "\u30d9\u30b9\u30c8\u30bb\u30e9\u30fc",
+  noBestSellers: "\u4eba\u6c17\u30e1\u30cb\u30e5\u30fc\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002",
+  openMaps: "Google\u30de\u30c3\u30d7\u3067\u958b\u304f",
+  badgeRecommended: "\u304a\u3059\u3059\u3081",
+  badgePopular: "\u4eba\u6c17",
+};
 
 const ProductCard = ({ product, badgeLabel }) => (
   <article className="azuma-card">
@@ -75,13 +96,11 @@ function RestaurantHome() {
     if (activeBanners.length <= 1) {
       return undefined;
     }
-
     const interval = window.setInterval(() => {
       setActiveBannerIndex((previousIndex) =>
         (previousIndex + 1) % activeBanners.length,
       );
     }, 5000);
-
     return () => window.clearInterval(interval);
   }, [activeBanners.length]);
 
@@ -98,12 +117,12 @@ function RestaurantHome() {
           {RESTAURANT_INFO.name}
         </a>
         <div className="azuma-nav-links">
-          <a href="#hero">ホーム</a>
-          <a href="#recommendations">おすすめ</a>
-          <a href="#best-sellers">人気メニュー</a>
-          <a href="#access">アクセス</a>
+          <a href="#hero">{TEXT.navHome}</a>
+          <a href="#recommendations">{TEXT.navRecommendations}</a>
+          <a href="#best-sellers">{TEXT.navBestSellers}</a>
+          <a href="#access">{TEXT.navAccess}</a>
           <Link to="/admin" className="azuma-admin-link">
-            管理
+            {TEXT.navAdmin}
           </Link>
         </div>
       </nav>
@@ -111,7 +130,9 @@ function RestaurantHome() {
       <section
         className="azuma-hero"
         id="hero"
-        style={{ backgroundImage: `url(${currentBanner.imageUrl})` }}
+        style={{
+          backgroundImage: `url(${currentBanner.imageUrl || BANNER_FALLBACK_IMAGE})`,
+        }}
       >
         <div className="azuma-overlay" />
         <div className="azuma-hero-content" id="top">
@@ -120,7 +141,7 @@ function RestaurantHome() {
           <p>{currentBanner.subtitle}</p>
           <div className="azuma-hero-actions">
             <a href={currentBanner.ctaLink}>{currentBanner.ctaText}</a>
-            <a href={`tel:${RESTAURANT_INFO.phone.replace(/-/g, "")}`}>電話する</a>
+            <a href={`tel:${RESTAURANT_INFO.phone.replace(/-/g, "")}`}>{TEXT.callNow}</a>
           </div>
         </div>
       </section>
@@ -133,7 +154,7 @@ function RestaurantHome() {
               className={index === activeBannerIndex ? "active" : ""}
               onClick={() => setActiveBannerIndex(index)}
               type="button"
-              aria-label={`バナー ${index + 1} を選択`}
+              aria-label={`${TEXT.selectBanner} ${index + 1} \u3092\u9078\u629e`}
             />
           ))}
         </div>
@@ -141,30 +162,34 @@ function RestaurantHome() {
 
       <section className="azuma-section" id="recommendations">
         <div className="azuma-section-head">
-          <p>料理長のおすすめ</p>
-          <h2>おすすめ</h2>
+          <p>{TEXT.chefPicks}</p>
+          <h2>{TEXT.recommendations}</h2>
         </div>
         <div className="azuma-grid">
           {recommendedProducts.length === 0 && (
-            <p className="azuma-empty">おすすめ商品はまだありません。</p>
+            <p className="azuma-empty">{TEXT.noRecommendations}</p>
           )}
           {recommendedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} badgeLabel="おすすめ" />
+            <ProductCard
+              key={product.id}
+              product={product}
+              badgeLabel={TEXT.badgeRecommended}
+            />
           ))}
         </div>
       </section>
 
       <section className="azuma-section" id="best-sellers">
         <div className="azuma-section-head">
-          <p>人気メニュー</p>
-          <h2>ベストセラー</h2>
+          <p>{TEXT.mostPopular}</p>
+          <h2>{TEXT.bestSellers}</h2>
         </div>
         <div className="azuma-grid">
           {bestSellerProducts.length === 0 && (
-            <p className="azuma-empty">人気メニューはまだありません。</p>
+            <p className="azuma-empty">{TEXT.noBestSellers}</p>
           )}
           {bestSellerProducts.map((product) => (
-            <ProductCard key={product.id} product={product} badgeLabel="人気" />
+            <ProductCard key={product.id} product={product} badgeLabel={TEXT.badgePopular} />
           ))}
         </div>
       </section>
@@ -178,7 +203,7 @@ function RestaurantHome() {
             {RESTAURANT_INFO.phone}
           </a>
           <a href={RESTAURANT_INFO.mapsLink} target="_blank" rel="noopener noreferrer">
-            Googleマップで開く
+            {TEXT.openMaps}
           </a>
         </div>
       </section>

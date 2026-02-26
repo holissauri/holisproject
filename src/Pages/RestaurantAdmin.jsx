@@ -32,6 +32,63 @@ const emptyBannerForm = {
 const IMAGE_MAX_SIZE_MB = 5;
 const IMAGE_MAX_BYTES = IMAGE_MAX_SIZE_MB * 1024 * 1024;
 
+const JP = {
+  adminPanel: "\u7ba1\u7406\u30d1\u30cd\u30eb",
+  adminTitle: "\u3042\u305a\u307e\u98df\u5802 \u7ba1\u7406\u753b\u9762",
+  backToSite: "\u30b5\u30a4\u30c8\u3078\u623b\u308b",
+  totalProducts: "\u5546\u54c1\u6570",
+  totalBanners: "\u30d0\u30ca\u30fc\u6570",
+  activeBanners: "\u516c\u958b\u4e2d\u30d0\u30ca\u30fc",
+  productManagement: "\u5546\u54c1\u7ba1\u7406",
+  bannerManagement: "\u30d0\u30ca\u30fc\u7ba1\u7406",
+  addProduct: "\u5546\u54c1\u3092\u8ffd\u52a0",
+  editProduct: "\u5546\u54c1\u3092\u7de8\u96c6",
+  productName: "\u5546\u54c1\u540d",
+  categoryPlaceholder: "\u30ab\u30c6\u30b4\u30ea\uff08\u4f8b\uff1a\u304a\u3064\u307e\u307f\uff09",
+  description: "\u7c21\u5358\u306a\u8aac\u660e",
+  price: "\u4fa1\u683c\uff08\u5186\uff09",
+  imageUrl: "\u753b\u50cfURL",
+  productImageTools: "\u5546\u54c1\u753b\u50cf\u306e\u7ba1\u7406",
+  bannerImageTools: "\u30d0\u30ca\u30fc\u753b\u50cf\u306e\u7ba1\u7406",
+  removeImage: "\u753b\u50cf\u3092\u524a\u9664",
+  imagePreviewAlt: "\u753b\u50cf\u30d7\u30ec\u30d3\u30e5\u30fc",
+  noImage: "\u753b\u50cf\u306a\u3057",
+  imageHelp: `URL\u5165\u529b\u307e\u305f\u306f\u30d5\u30a1\u30a4\u30eb\u9078\u629e\u3067\u753b\u50cf\u3092\u8ffd\u52a0\u30fb\u5909\u66f4\u3067\u304d\u307e\u3059\uff08\u6700\u5927${IMAGE_MAX_SIZE_MB}MB\uff09\u3002`,
+  showRecommendation: "\u304a\u3059\u3059\u3081\u306b\u8868\u793a",
+  showBestSeller: "\u4eba\u6c17\u30e1\u30cb\u30e5\u30fc\u306b\u8868\u793a",
+  saveChanges: "\u5909\u66f4\u3092\u4fdd\u5b58",
+  cancelEdit: "\u7de8\u96c6\u3092\u30ad\u30e3\u30f3\u30bb\u30eb",
+  productList: "\u5546\u54c1\u4e00\u89a7",
+  noProducts: "\u5546\u54c1\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002",
+  noDescription: "\u8aac\u660e\u306a\u3057\u3002",
+  recommended: "\u304a\u3059\u3059\u3081",
+  hidden: "\u975e\u8868\u793a",
+  bestSeller: "\u4eba\u6c17\u30e1\u30cb\u30e5\u30fc",
+  normalMenu: "\u901a\u5e38\u30e1\u30cb\u30e5\u30fc",
+  edit: "\u7de8\u96c6",
+  delete: "\u524a\u9664",
+  removeProductImage: "\u753b\u50cf\u524a\u9664",
+  addBanner: "\u30d0\u30ca\u30fc\u3092\u8ffd\u52a0",
+  editBanner: "\u30d0\u30ca\u30fc\u3092\u7de8\u96c6",
+  bannerTitle: "\u30d0\u30ca\u30fc\u30bf\u30a4\u30c8\u30eb",
+  subtitle: "\u30b5\u30d6\u30bf\u30a4\u30c8\u30eb",
+  bannerImageUrl: "\u30d0\u30ca\u30fc\u753b\u50cfURL",
+  buttonText: "\u30dc\u30bf\u30f3\u6587\u8a00",
+  linkPlaceholder: "\u30ea\u30f3\u30af\u5148\uff08\u4f8b\uff1a#best-sellers\uff09",
+  isActive: "\u516c\u958b\u4e2d",
+  bannerList: "\u30d0\u30ca\u30fc\u4e00\u89a7",
+  noBanners: "\u30d0\u30ca\u30fc\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002",
+  noSubtitle: "\u30b5\u30d6\u30bf\u30a4\u30c8\u30eb\u306a\u3057\u3002",
+  active: "\u516c\u958b\u4e2d",
+  inactive: "\u975e\u516c\u958b",
+  deactivate: "\u975e\u516c\u958b\u306b\u3059\u308b",
+  activate: "\u516c\u958b\u3059\u308b",
+  removeBannerImage: "\u753b\u50cf\u524a\u9664",
+  alertPickImage: "\u753b\u50cf\u30d5\u30a1\u30a4\u30eb\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044\u3002",
+  alertImageSize: `\u753b\u50cf\u30b5\u30a4\u30ba\u306f ${IMAGE_MAX_SIZE_MB}MB \u4ee5\u4e0b\u306b\u3057\u3066\u304f\u3060\u3055\u3044\u3002`,
+  alertImageReadFail: "\u753b\u50cf\u306e\u8aad\u307f\u8fbc\u307f\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002",
+};
+
 const readFileAsDataUrl = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -75,40 +132,55 @@ function RestaurantAdmin() {
     [banners],
   );
 
+  const validateImageFile = (file) => {
+    if (!file) {
+      return false;
+    }
+    if (!file.type.startsWith("image/")) {
+      window.alert(JP.alertPickImage);
+      return false;
+    }
+    if (file.size > IMAGE_MAX_BYTES) {
+      window.alert(JP.alertImageSize);
+      return false;
+    }
+    return true;
+  };
+
   const handleProductImageUpload = async (event) => {
     const file = event.target.files?.[0];
     event.target.value = "";
-
-    if (!file) {
+    if (!validateImageFile(file)) {
       return;
     }
-
-    if (!file.type.startsWith("image/")) {
-      window.alert("画像ファイルを選択してください。");
-      return;
-    }
-
-    if (file.size > IMAGE_MAX_BYTES) {
-      window.alert(`画像サイズは ${IMAGE_MAX_SIZE_MB}MB 以下にしてください。`);
-      return;
-    }
-
     try {
       const dataUrl = await readFileAsDataUrl(file);
-      setProductForm((previous) => ({
-        ...previous,
-        imageUrl: dataUrl,
-      }));
+      setProductForm((previous) => ({ ...previous, imageUrl: dataUrl }));
     } catch {
-      window.alert("画像の読み込みに失敗しました。");
+      window.alert(JP.alertImageReadFail);
+    }
+  };
+
+  const handleBannerImageUpload = async (event) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!validateImageFile(file)) {
+      return;
+    }
+    try {
+      const dataUrl = await readFileAsDataUrl(file);
+      setBannerForm((previous) => ({ ...previous, imageUrl: dataUrl }));
+    } catch {
+      window.alert(JP.alertImageReadFail);
     }
   };
 
   const clearProductImageInForm = () => {
-    setProductForm((previous) => ({
-      ...previous,
-      imageUrl: "",
-    }));
+    setProductForm((previous) => ({ ...previous, imageUrl: "" }));
+  };
+
+  const clearBannerImageInForm = () => {
+    setBannerForm((previous) => ({ ...previous, imageUrl: "" }));
   };
 
   const clearProductImageById = (productId) => {
@@ -119,9 +191,16 @@ function RestaurantAdmin() {
     );
   };
 
+  const clearBannerImageById = (bannerId) => {
+    setBanners((previous) =>
+      previous.map((item) =>
+        item.id === bannerId ? { ...item, imageUrl: "" } : item,
+      ),
+    );
+  };
+
   const handleProductSubmit = (event) => {
     event.preventDefault();
-
     const normalizedPrice = Number(productForm.price);
     if (!productForm.name || !productForm.category || Number.isNaN(normalizedPrice)) {
       return;
@@ -150,7 +229,7 @@ function RestaurantAdmin() {
 
   const handleBannerSubmit = (event) => {
     event.preventDefault();
-    if (!bannerForm.title || !bannerForm.imageUrl) {
+    if (!bannerForm.title) {
       return;
     }
 
@@ -162,10 +241,7 @@ function RestaurantAdmin() {
       );
       setEditingBannerId(null);
     } else {
-      const newBanner = {
-        ...bannerForm,
-        id: `banner-${Date.now()}`,
-      };
+      const newBanner = { ...bannerForm, id: `banner-${Date.now()}` };
       setBanners((previous) => [newBanner, ...previous]);
     }
 
@@ -203,25 +279,25 @@ function RestaurantAdmin() {
     <main className="azuma-site azuma-admin">
       <header className="azuma-admin-top">
         <div>
-          <p>管理パネル</p>
-          <h1>あずま食堂 管理画面</h1>
+          <p>{JP.adminPanel}</p>
+          <h1>{JP.adminTitle}</h1>
         </div>
         <Link to="/" className="azuma-back-link">
-          サイトへ戻る
+          {JP.backToSite}
         </Link>
       </header>
 
       <section className="azuma-admin-stats">
         <div>
-          <p>商品数</p>
+          <p>{JP.totalProducts}</p>
           <strong>{products.length}</strong>
         </div>
         <div>
-          <p>バナー数</p>
+          <p>{JP.totalBanners}</p>
           <strong>{banners.length}</strong>
         </div>
         <div>
-          <p>公開中バナー</p>
+          <p>{JP.activeBanners}</p>
           <strong>{activeBannerCount}</strong>
         </div>
       </section>
@@ -232,23 +308,23 @@ function RestaurantAdmin() {
           onClick={() => setActivePanel("product")}
           className={activePanel === "product" ? "active" : ""}
         >
-          商品管理
+          {JP.productManagement}
         </button>
         <button
           type="button"
           onClick={() => setActivePanel("banner")}
           className={activePanel === "banner" ? "active" : ""}
         >
-          バナー管理
+          {JP.bannerManagement}
         </button>
       </section>
 
       {activePanel === "product" && (
         <section className="azuma-admin-panel">
           <form className="azuma-form" onSubmit={handleProductSubmit}>
-            <h2>{editingProductId ? "商品を編集" : "商品を追加"}</h2>
+            <h2>{editingProductId ? JP.editProduct : JP.addProduct}</h2>
             <input
-              placeholder="商品名"
+              placeholder={JP.productName}
               value={productForm.name}
               onChange={(event) =>
                 setProductForm((previous) => ({
@@ -259,7 +335,7 @@ function RestaurantAdmin() {
               required
             />
             <input
-              placeholder="カテゴリ（例：おつまみ）"
+              placeholder={JP.categoryPlaceholder}
               value={productForm.category}
               onChange={(event) =>
                 setProductForm((previous) => ({
@@ -270,7 +346,7 @@ function RestaurantAdmin() {
               required
             />
             <textarea
-              placeholder="簡単な説明"
+              placeholder={JP.description}
               value={productForm.description}
               onChange={(event) =>
                 setProductForm((previous) => ({
@@ -281,7 +357,7 @@ function RestaurantAdmin() {
               rows={3}
             />
             <input
-              placeholder="価格（円）"
+              placeholder={JP.price}
               type="number"
               min="0"
               value={productForm.price}
@@ -294,7 +370,7 @@ function RestaurantAdmin() {
               required
             />
             <input
-              placeholder="画像URL"
+              placeholder={JP.imageUrl}
               value={productForm.imageUrl}
               onChange={(event) =>
                 setProductForm((previous) => ({
@@ -305,7 +381,7 @@ function RestaurantAdmin() {
             />
 
             <div className="azuma-image-tools">
-              <p>商品画像の管理</p>
+              <p>{JP.productImageTools}</p>
               <div className="azuma-upload-row">
                 <input
                   type="file"
@@ -314,17 +390,17 @@ function RestaurantAdmin() {
                   className="azuma-upload-input"
                 />
                 <button type="button" className="ghost" onClick={clearProductImageInForm}>
-                  画像を削除
+                  {JP.removeImage}
                 </button>
               </div>
               <div className="azuma-thumb-preview">
                 {productForm.imageUrl ? (
-                  <img src={productForm.imageUrl} alt="商品画像プレビュー" className="azuma-thumb" />
+                  <img src={productForm.imageUrl} alt={JP.imagePreviewAlt} className="azuma-thumb" />
                 ) : (
-                  <div className="azuma-thumb-placeholder">画像なし</div>
+                  <div className="azuma-thumb-placeholder">{JP.noImage}</div>
                 )}
               </div>
-              <small>URL入力またはファイル選択で画像を追加・変更できます（最大5MB）。</small>
+              <small>{JP.imageHelp}</small>
             </div>
 
             <div className="azuma-check-row">
@@ -339,7 +415,7 @@ function RestaurantAdmin() {
                     }))
                   }
                 />
-                おすすめに表示
+                {JP.showRecommendation}
               </label>
               <label>
                 <input
@@ -352,13 +428,11 @@ function RestaurantAdmin() {
                     }))
                   }
                 />
-                人気メニューに表示
+                {JP.showBestSeller}
               </label>
             </div>
             <div className="azuma-form-actions">
-              <button type="submit">
-                {editingProductId ? "変更を保存" : "商品を追加"}
-              </button>
+              <button type="submit">{editingProductId ? JP.saveChanges : JP.addProduct}</button>
               {editingProductId && (
                 <button
                   type="button"
@@ -368,15 +442,15 @@ function RestaurantAdmin() {
                     setProductForm(emptyProductForm);
                   }}
                 >
-                  編集をキャンセル
+                  {JP.cancelEdit}
                 </button>
               )}
             </div>
           </form>
 
           <div className="azuma-list">
-            <h2>商品一覧</h2>
-            {products.length === 0 && <p>商品はまだありません。</p>}
+            <h2>{JP.productList}</h2>
+            {products.length === 0 && <p>{JP.noProducts}</p>}
             {products.map((product) => (
               <article key={product.id}>
                 <div className="azuma-list-body">
@@ -384,29 +458,29 @@ function RestaurantAdmin() {
                     {product.imageUrl ? (
                       <img src={product.imageUrl} alt={product.name} />
                     ) : (
-                      <div className="azuma-thumb-placeholder">画像なし</div>
+                      <div className="azuma-thumb-placeholder">{JP.noImage}</div>
                     )}
                   </div>
                   <div>
                     <h3>{product.name}</h3>
                     <p>{`${product.category} | ¥${Number(product.price).toLocaleString("ja-JP")}`}</p>
-                    <p>{product.description || "説明なし。"}</p>
+                    <p>{product.description || JP.noDescription}</p>
                     <small>
-                      {product.recommended ? "おすすめ" : "非表示"} |{" "}
-                      {product.bestSeller ? "人気メニュー" : "通常メニュー"}
+                      {product.recommended ? JP.recommended : JP.hidden} |{" "}
+                      {product.bestSeller ? JP.bestSeller : JP.normalMenu}
                     </small>
                   </div>
                 </div>
                 <div className="azuma-inline-actions">
                   <button type="button" onClick={() => handleProductEdit(product)}>
-                    編集
+                    {JP.edit}
                   </button>
                   <button
                     type="button"
                     className="warn"
                     onClick={() => clearProductImageById(product.id)}
                   >
-                    画像削除
+                    {JP.removeProductImage}
                   </button>
                   <button
                     type="button"
@@ -417,7 +491,7 @@ function RestaurantAdmin() {
                       )
                     }
                   >
-                    削除
+                    {JP.delete}
                   </button>
                 </div>
               </article>
@@ -429,9 +503,9 @@ function RestaurantAdmin() {
       {activePanel === "banner" && (
         <section className="azuma-admin-panel">
           <form className="azuma-form" onSubmit={handleBannerSubmit}>
-            <h2>{editingBannerId ? "バナーを編集" : "バナーを追加"}</h2>
+            <h2>{editingBannerId ? JP.editBanner : JP.addBanner}</h2>
             <input
-              placeholder="バナータイトル"
+              placeholder={JP.bannerTitle}
               value={bannerForm.title}
               onChange={(event) =>
                 setBannerForm((previous) => ({
@@ -442,7 +516,7 @@ function RestaurantAdmin() {
               required
             />
             <textarea
-              placeholder="サブタイトル"
+              placeholder={JP.subtitle}
               value={bannerForm.subtitle}
               onChange={(event) =>
                 setBannerForm((previous) => ({
@@ -453,7 +527,7 @@ function RestaurantAdmin() {
               rows={3}
             />
             <input
-              placeholder="バナー画像URL"
+              placeholder={JP.bannerImageUrl}
               value={bannerForm.imageUrl}
               onChange={(event) =>
                 setBannerForm((previous) => ({
@@ -461,10 +535,31 @@ function RestaurantAdmin() {
                   imageUrl: event.target.value,
                 }))
               }
-              required
             />
+            <div className="azuma-image-tools">
+              <p>{JP.bannerImageTools}</p>
+              <div className="azuma-upload-row">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleBannerImageUpload}
+                  className="azuma-upload-input"
+                />
+                <button type="button" className="ghost" onClick={clearBannerImageInForm}>
+                  {JP.removeImage}
+                </button>
+              </div>
+              <div className="azuma-thumb-preview">
+                {bannerForm.imageUrl ? (
+                  <img src={bannerForm.imageUrl} alt={JP.imagePreviewAlt} className="azuma-thumb" />
+                ) : (
+                  <div className="azuma-thumb-placeholder">{JP.noImage}</div>
+                )}
+              </div>
+              <small>{JP.imageHelp}</small>
+            </div>
             <input
-              placeholder="ボタン文言"
+              placeholder={JP.buttonText}
               value={bannerForm.ctaText}
               onChange={(event) =>
                 setBannerForm((previous) => ({
@@ -474,7 +569,7 @@ function RestaurantAdmin() {
               }
             />
             <input
-              placeholder="リンク先（例：#best-sellers）"
+              placeholder={JP.linkPlaceholder}
               value={bannerForm.ctaLink}
               onChange={(event) =>
                 setBannerForm((previous) => ({
@@ -494,12 +589,10 @@ function RestaurantAdmin() {
                   }))
                 }
               />
-              公開中
+              {JP.isActive}
             </label>
             <div className="azuma-form-actions">
-              <button type="submit">
-                {editingBannerId ? "変更を保存" : "バナーを追加"}
-              </button>
+              <button type="submit">{editingBannerId ? JP.saveChanges : JP.addBanner}</button>
               {editingBannerId && (
                 <button
                   type="button"
@@ -509,25 +602,41 @@ function RestaurantAdmin() {
                     setBannerForm(emptyBannerForm);
                   }}
                 >
-                  編集をキャンセル
+                  {JP.cancelEdit}
                 </button>
               )}
             </div>
           </form>
 
           <div className="azuma-list">
-            <h2>バナー一覧</h2>
-            {banners.length === 0 && <p>バナーはまだありません。</p>}
+            <h2>{JP.bannerList}</h2>
+            {banners.length === 0 && <p>{JP.noBanners}</p>}
             {banners.map((banner) => (
               <article key={banner.id}>
-                <div>
-                  <h3>{banner.title}</h3>
-                  <p>{banner.subtitle || "サブタイトルなし。"}</p>
-                  <small>{banner.active ? "公開中" : "非公開"}</small>
+                <div className="azuma-list-body">
+                  <div className="azuma-list-media">
+                    {banner.imageUrl ? (
+                      <img src={banner.imageUrl} alt={banner.title} />
+                    ) : (
+                      <div className="azuma-thumb-placeholder">{JP.noImage}</div>
+                    )}
+                  </div>
+                  <div>
+                    <h3>{banner.title}</h3>
+                    <p>{banner.subtitle || JP.noSubtitle}</p>
+                    <small>{banner.active ? JP.active : JP.inactive}</small>
+                  </div>
                 </div>
                 <div className="azuma-inline-actions">
                   <button type="button" onClick={() => handleBannerEdit(banner)}>
-                    編集
+                    {JP.edit}
+                  </button>
+                  <button
+                    type="button"
+                    className="warn"
+                    onClick={() => clearBannerImageById(banner.id)}
+                  >
+                    {JP.removeBannerImage}
                   </button>
                   <button
                     type="button"
@@ -541,7 +650,7 @@ function RestaurantAdmin() {
                       )
                     }
                   >
-                    {banner.active ? "非公開にする" : "公開する"}
+                    {banner.active ? JP.deactivate : JP.activate}
                   </button>
                   <button
                     type="button"
@@ -552,7 +661,7 @@ function RestaurantAdmin() {
                       )
                     }
                   >
-                    削除
+                    {JP.delete}
                   </button>
                 </div>
               </article>
