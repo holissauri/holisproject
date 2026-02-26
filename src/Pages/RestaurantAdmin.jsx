@@ -4,9 +4,12 @@ import "./RestaurantSite.css";
 import {
   DEFAULT_BANNERS,
   DEFAULT_PRODUCTS,
+  DEFAULT_STORE_DETAIL_SECTIONS,
   getStoredBanners,
+  getStoredStoreDetails,
   getStoredProducts,
   saveBanners,
+  saveStoreDetails,
   saveProducts,
 } from "../restaurant/store";
 
@@ -41,6 +44,7 @@ const JP = {
   activeBanners: "\u516c\u958b\u4e2d\u30d0\u30ca\u30fc",
   productManagement: "\u5546\u54c1\u7ba1\u7406",
   bannerManagement: "\u30d0\u30ca\u30fc\u7ba1\u7406",
+  storeDetailsManagement: "\u5e97\u8217\u60c5\u5831\u7ba1\u7406",
   addProduct: "\u5546\u54c1\u3092\u8ffd\u52a0",
   editProduct: "\u5546\u54c1\u3092\u7de8\u96c6",
   productName: "\u5546\u54c1\u540d",
@@ -84,6 +88,16 @@ const JP = {
   deactivate: "\u975e\u516c\u958b\u306b\u3059\u308b",
   activate: "\u516c\u958b\u3059\u308b",
   removeBannerImage: "\u753b\u50cf\u524a\u9664",
+  storeDetailsEditor: "\u5e97\u8217\u8a73\u7d30\u60c5\u5831\u3092\u7de8\u96c6",
+  storeDetailsHelp:
+    "\u5404\u9805\u76ee\u306e\u30e9\u30d9\u30eb\u3068\u5185\u5bb9\u3092\u5909\u66f4\u3067\u304d\u307e\u3059\u3002\u5185\u5bb9\u306f1\u884c\u305a\u3064\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044\u3002",
+  sectionTitle: "\u30bb\u30af\u30b7\u30e7\u30f3\u30bf\u30a4\u30c8\u30eb",
+  itemLabel: "\u9805\u76ee\u540d",
+  itemValues: "\u5185\u5bb9\uff081\u884c\u305a\u3064\uff09",
+  showMap: "\u5730\u56f3\u3092\u8868\u793a",
+  saveStoreDetails: "\u5e97\u8217\u60c5\u5831\u3092\u4fdd\u5b58",
+  resetStoreDetails: "\u4fdd\u5b58\u524d\u306e\u72b6\u614b\u306b\u623b\u3059",
+  restoreDefaults: "\u521d\u671f\u5024\u306b\u623b\u3059",
   alertPickImage: "\u753b\u50cf\u30d5\u30a1\u30a4\u30eb\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044\u3002",
   alertImageSize: `\u753b\u50cf\u30b5\u30a4\u30ba\u306f ${IMAGE_MAX_SIZE_MB}MB \u4ee5\u4e0b\u306b\u3057\u3066\u304f\u3060\u3055\u3044\u3002`,
   alertImageReadFail: "\u753b\u50cf\u306e\u8aad\u307f\u8fbc\u307f\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002",
@@ -97,9 +111,27 @@ const readFileAsDataUrl = (file) =>
     reader.readAsDataURL(file);
   });
 
+const cloneStoreDetails = (sections) =>
+  (Array.isArray(sections) ? sections : []).map((section, sectionIndex) => ({
+    id:
+      typeof section?.id === "string" && section.id.trim()
+        ? section.id
+        : `section-${sectionIndex + 1}`,
+    title: typeof section?.title === "string" ? section.title : "",
+    rows: (Array.isArray(section?.rows) ? section.rows : []).map((row) => ({
+      label: typeof row?.label === "string" ? row.label : "",
+      values: Array.isArray(row?.values) ? [...row.values] : [String(row?.values || "")],
+      mapEmbed: Boolean(row?.mapEmbed),
+    })),
+  }));
+
 function RestaurantAdmin() {
   const [products, setProducts] = useState(DEFAULT_PRODUCTS);
   const [banners, setBanners] = useState(DEFAULT_BANNERS);
+  const [storeDetails, setStoreDetails] = useState(DEFAULT_STORE_DETAIL_SECTIONS);
+  const [storeDetailsDraft, setStoreDetailsDraft] = useState(() =>
+    cloneStoreDetails(DEFAULT_STORE_DETAIL_SECTIONS),
+  );
   const [isHydrated, setIsHydrated] = useState(false);
   const [productForm, setProductForm] = useState(emptyProductForm);
   const [bannerForm, setBannerForm] = useState(emptyBannerForm);
@@ -108,8 +140,15 @@ function RestaurantAdmin() {
   const [activePanel, setActivePanel] = useState("product");
 
   useEffect(() => {
+    const loadedStoreDetails = getStoredStoreDetails();
+    const normalizedStoreDetails = cloneStoreDetails(loadedStoreDetails);
+    const fallbackStoreDetails = cloneStoreDetails(DEFAULT_STORE_DETAIL_SECTIONS);
+    const safeStoreDetails =
+      normalizedStoreDetails.length > 0 ? normalizedStoreDetails : fallbackStoreDetails;
     setProducts(getStoredProducts());
     setBanners(getStoredBanners());
+    setStoreDetails(safeStoreDetails);
+    setStoreDetailsDraft(cloneStoreDetails(safeStoreDetails));
     setIsHydrated(true);
   }, []);
 
@@ -126,6 +165,13 @@ function RestaurantAdmin() {
     }
     saveBanners(banners);
   }, [banners, isHydrated]);
+
+  useEffect(() => {
+    if (!isHydrated) {
+      return;
+    }
+    saveStoreDetails(storeDetails);
+  }, [storeDetails, isHydrated]);
 
   const activeBannerCount = useMemo(
     () => banners.filter((banner) => banner.active).length,
@@ -275,6 +321,65 @@ function RestaurantAdmin() {
     setActivePanel("banner");
   };
 
+  const handleDetailSectionTitleChange = (sectionIndex, value) => {
+    setStoreDetailsDraft((previous) =>
+      previous.map((section, index) =>
+        index === sectionIndex ? { ...section, title: value } : section,
+      ),
+    );
+  };
+
+  const handleDetailRowLabelChange = (sectionIndex, rowIndex, value) => {
+    setStoreDetailsDraft((previous) =>
+      previous.map((section, currentSectionIndex) =>
+        currentSectionIndex === sectionIndex
+          ? {
+              ...section,
+              rows: section.rows.map((row, currentRowIndex) =>
+                currentRowIndex === rowIndex ? { ...row, label: value } : row,
+              ),
+            }
+          : section,
+      ),
+    );
+  };
+
+  const handleDetailRowValuesChange = (sectionIndex, rowIndex, value) => {
+    const nextValues = value.split(/\r?\n/);
+    setStoreDetailsDraft((previous) =>
+      previous.map((section, currentSectionIndex) =>
+        currentSectionIndex === sectionIndex
+          ? {
+              ...section,
+              rows: section.rows.map((row, currentRowIndex) =>
+                currentRowIndex === rowIndex ? { ...row, values: nextValues } : row,
+              ),
+            }
+          : section,
+      ),
+    );
+  };
+
+  const handleDetailRowMapToggle = (sectionIndex, rowIndex, checked) => {
+    setStoreDetailsDraft((previous) =>
+      previous.map((section, currentSectionIndex) =>
+        currentSectionIndex === sectionIndex
+          ? {
+              ...section,
+              rows: section.rows.map((row, currentRowIndex) =>
+                currentRowIndex === rowIndex ? { ...row, mapEmbed: checked } : row,
+              ),
+            }
+          : section,
+      ),
+    );
+  };
+
+  const handleStoreDetailsSubmit = (event) => {
+    event.preventDefault();
+    setStoreDetails(cloneStoreDetails(storeDetailsDraft));
+  };
+
   return (
     <main className="azuma-site azuma-admin">
       <header className="azuma-admin-top">
@@ -316,6 +421,13 @@ function RestaurantAdmin() {
           className={activePanel === "banner" ? "active" : ""}
         >
           {JP.bannerManagement}
+        </button>
+        <button
+          type="button"
+          onClick={() => setActivePanel("details")}
+          className={activePanel === "details" ? "active" : ""}
+        >
+          {JP.storeDetailsManagement}
         </button>
       </section>
 
@@ -667,6 +779,82 @@ function RestaurantAdmin() {
               </article>
             ))}
           </div>
+        </section>
+      )}
+
+      {activePanel === "details" && (
+        <section className="azuma-admin-panel azuma-admin-panel-single">
+          <form className="azuma-form azuma-details-form" onSubmit={handleStoreDetailsSubmit}>
+            <h2>{JP.storeDetailsEditor}</h2>
+            <p className="azuma-details-help">{JP.storeDetailsHelp}</p>
+
+            {storeDetailsDraft.map((section, sectionIndex) => (
+              <fieldset className="azuma-details-fieldset" key={section.id}>
+                <legend>{section.id}</legend>
+                <label className="azuma-details-label">{JP.sectionTitle}</label>
+                <input
+                  value={section.title}
+                  onChange={(event) =>
+                    handleDetailSectionTitleChange(sectionIndex, event.target.value)
+                  }
+                />
+
+                {section.rows.map((row, rowIndex) => (
+                  <div className="azuma-details-row" key={`${section.id}-${rowIndex}`}>
+                    <label className="azuma-details-label">{JP.itemLabel}</label>
+                    <input
+                      value={row.label}
+                      onChange={(event) =>
+                        handleDetailRowLabelChange(sectionIndex, rowIndex, event.target.value)
+                      }
+                    />
+                    <label className="azuma-details-label">{JP.itemValues}</label>
+                    <textarea
+                      rows={Math.max(3, row.values.length + 1)}
+                      value={row.values.join("\n")}
+                      onChange={(event) =>
+                        handleDetailRowValuesChange(sectionIndex, rowIndex, event.target.value)
+                      }
+                    />
+                    <label className="azuma-single-check">
+                      <input
+                        type="checkbox"
+                        checked={Boolean(row.mapEmbed)}
+                        onChange={(event) =>
+                          handleDetailRowMapToggle(
+                            sectionIndex,
+                            rowIndex,
+                            event.target.checked,
+                          )
+                        }
+                      />
+                      {JP.showMap}
+                    </label>
+                  </div>
+                ))}
+              </fieldset>
+            ))}
+
+            <div className="azuma-form-actions">
+              <button type="submit">{JP.saveStoreDetails}</button>
+              <button
+                type="button"
+                className="ghost"
+                onClick={() => setStoreDetailsDraft(cloneStoreDetails(storeDetails))}
+              >
+                {JP.resetStoreDetails}
+              </button>
+              <button
+                type="button"
+                className="ghost"
+                onClick={() =>
+                  setStoreDetailsDraft(cloneStoreDetails(DEFAULT_STORE_DETAIL_SECTIONS))
+                }
+              >
+                {JP.restoreDefaults}
+              </button>
+            </div>
+          </form>
         </section>
       )}
     </main>

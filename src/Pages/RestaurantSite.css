@@ -501,12 +501,67 @@
   grid-template-columns: 1fr 1.3fr;
 }
 
+.azuma-admin-panel-single {
+  grid-template-columns: 1fr;
+}
+
 .azuma-form,
 .azuma-list {
   border-radius: 18px;
   padding: 1rem;
   border: 1px solid var(--azuma-line);
   background: rgba(255, 255, 255, 0.78);
+}
+
+.azuma-details-form {
+  gap: 1rem;
+}
+
+.azuma-details-help {
+  margin: 0;
+  color: var(--azuma-ink-soft);
+  font-size: 0.9rem;
+}
+
+.azuma-details-fieldset {
+  margin: 0;
+  border: 1px solid var(--azuma-line);
+  border-radius: 12px;
+  padding: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.azuma-details-fieldset legend {
+  padding: 0 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--azuma-accent-dark);
+}
+
+.azuma-details-row {
+  border: 1px dashed var(--azuma-line);
+  border-radius: 10px;
+  padding: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.azuma-details-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--azuma-ink-soft);
+}
+
+.azuma-details-row textarea {
+  min-height: 92px;
+  resize: vertical;
 }
 
 .azuma-form h2,
