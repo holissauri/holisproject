@@ -462,59 +462,276 @@
 }
 
 .azuma-auth-shell {
+  position: relative;
+  overflow: hidden;
   min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2.2rem);
+  background:
+    radial-gradient(circle at 14% 12%, rgba(232, 157, 41, 0.24), transparent 34%),
+    radial-gradient(circle at 88% 18%, rgba(255, 112, 67, 0.24), transparent 32%),
+    linear-gradient(155deg, #101724 8%, #161f2f 45%, #101724 100%);
+}
+
+.azuma-auth-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.azuma-lantern {
+  position: absolute;
+  width: 56px;
+  height: 140px;
+  border-radius: 999px;
+  background:
+    linear-gradient(to bottom, rgba(255, 241, 210, 0.95), rgba(228, 128, 32, 0.95));
+  box-shadow:
+    0 0 0 4px rgba(255, 214, 148, 0.14),
+    0 24px 36px rgba(0, 0, 0, 0.36),
+    0 0 60px rgba(255, 168, 58, 0.42);
+  animation: azumaLanternFloat 3.6s ease-in-out infinite;
+}
+
+.azuma-lantern::before,
+.azuma-lantern::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 62%;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(91, 49, 11, 0.55);
+}
+
+.azuma-lantern::before {
+  top: 14px;
+}
+
+.azuma-lantern::after {
+  bottom: 14px;
+}
+
+.azuma-lantern-left {
+  left: clamp(2rem, 8vw, 7rem);
+  top: clamp(1rem, 8vh, 4.5rem);
+}
+
+.azuma-lantern-right {
+  right: clamp(2rem, 8vw, 7rem);
+  top: clamp(1.8rem, 14vh, 8rem);
+  animation-delay: 1.2s;
+}
+
+.azuma-smoke {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 999px;
+  filter: blur(38px);
+  opacity: 0.3;
+  animation: azumaSmokeMove 7.8s ease-in-out infinite;
+}
+
+.azuma-smoke-one {
+  right: 18%;
+  bottom: 10%;
+  background: rgba(255, 165, 78, 0.52);
+}
+
+.azuma-smoke-two {
+  left: 14%;
+  bottom: 14%;
+  background: rgba(146, 95, 42, 0.38);
+  animation-delay: 2.6s;
+}
+
+.azuma-auth-layout {
+  position: relative;
+  z-index: 1;
+  width: min(1040px, 100%);
   display: grid;
-  place-items: center;
-  padding: 1rem;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1.1rem;
+}
+
+.azuma-auth-story,
+.azuma-auth-card {
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: clamp(1rem, 2.3vw, 1.6rem);
+  backdrop-filter: blur(8px);
+}
+
+.azuma-auth-story {
+  background:
+    linear-gradient(160deg, rgba(26, 34, 52, 0.92), rgba(14, 18, 28, 0.9)),
+    #111827;
+  color: #f9e7c6;
+}
+
+.azuma-auth-badge {
+  display: inline-flex;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 187, 87, 0.6);
+  color: #ffd68e;
+  padding: 0.3rem 0.62rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.azuma-auth-story h1 {
+  margin-top: 0.9rem;
+  font-size: clamp(1.55rem, 2.4vw, 2.2rem);
+  line-height: 1.2;
+}
+
+.azuma-auth-story > p {
+  margin-top: 0.75rem;
+  color: rgba(255, 235, 199, 0.86);
+  line-height: 1.7;
+}
+
+.azuma-auth-scenes {
+  margin-top: 1.1rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.azuma-auth-scenes div {
+  padding: 0.72rem 0.85rem;
+  border-radius: 14px;
+  background: rgba(255, 180, 79, 0.08);
+  border: 1px solid rgba(255, 180, 79, 0.22);
+}
+
+.azuma-auth-scenes strong {
+  display: block;
+  font-size: 0.94rem;
+}
+
+.azuma-auth-scenes span {
+  display: block;
+  margin-top: 0.2rem;
+  color: rgba(255, 236, 206, 0.82);
+  font-size: 0.87rem;
 }
 
 .azuma-auth-card {
-  width: min(460px, 100%);
-  border-radius: 20px;
-  border: 1px solid var(--azuma-line);
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: var(--azuma-shadow);
-  padding: 1.2rem;
+  width: min(560px, 100%);
+  background:
+    linear-gradient(150deg, rgba(250, 243, 229, 0.96), rgba(244, 235, 219, 0.94)),
+    #f8efde;
+  box-shadow: 0 20px 46px rgba(6, 10, 18, 0.42);
 }
 
-.azuma-auth-card h1 {
+.azuma-auth-layout .azuma-auth-card {
+  width: 100%;
+}
+
+.azuma-auth-panel-title {
   margin: 0;
-  font-size: clamp(1.25rem, 2.3vw, 1.85rem);
+  color: var(--azuma-red);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.azuma-auth-card h1,
+.azuma-auth-card h2 {
+  margin: 0;
+  margin-top: 0.28rem;
+  font-size: clamp(1.25rem, 2.2vw, 1.95rem);
 }
 
 .azuma-auth-subtitle {
   margin-top: 0.4rem;
-  color: var(--azuma-ink-soft);
+  color: rgba(31, 35, 41, 0.76);
+}
+
+.azuma-auth-status {
+  margin-top: 0.95rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.azuma-auth-status span {
+  border-radius: 999px;
+  background: rgba(16, 23, 36, 0.08);
+  border: 1px solid rgba(16, 23, 36, 0.18);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: rgba(16, 23, 36, 0.78);
+  padding: 0.28rem 0.56rem;
 }
 
 .azuma-auth-help {
-  margin-top: 0.8rem;
-  padding: 0.72rem;
-  border-radius: 10px;
-  background: rgba(14, 19, 32, 0.06);
+  margin-top: 0.72rem;
+  padding: 0.7rem 0.76rem;
+  border-radius: 12px;
+  background: rgba(200, 138, 45, 0.08);
+  border: 1px solid rgba(200, 138, 45, 0.18);
   color: var(--azuma-ink-soft);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
 }
 
 .azuma-auth-form {
-  margin-top: 0.95rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.58rem;
+  gap: 0.72rem;
+}
+
+.azuma-auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
 .azuma-auth-form label {
-  font-size: 0.86rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--azuma-ink-soft);
+  letter-spacing: 0.02em;
 }
 
 .azuma-auth-form input {
   border: 1px solid rgba(31, 35, 41, 0.28);
-  border-radius: 10px;
-  padding: 0.62rem 0.7rem;
+  border-radius: 12px;
+  padding: 0.72rem 0.78rem;
   outline: none;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.azuma-auth-password-wrap {
+  position: relative;
+}
+
+.azuma-auth-password-wrap input {
+  width: 100%;
+  padding-right: 5.1rem;
+}
+
+.azuma-toggle-password {
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid rgba(31, 35, 41, 0.2);
+  background: rgba(14, 19, 32, 0.06);
+  color: var(--azuma-ink);
+  border-radius: 9px;
+  padding: 0.32rem 0.56rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .azuma-auth-form input:focus {
@@ -522,38 +739,74 @@
   box-shadow: 0 0 0 3px rgba(200, 138, 45, 0.18);
 }
 
-.azuma-auth-form button {
-  margin-top: 0.55rem;
+.azuma-auth-submit {
+  margin-top: 0.35rem;
   border: 0;
-  border-radius: 10px;
-  padding: 0.72rem 0.9rem;
-  background: var(--azuma-accent);
-  color: var(--azuma-navy);
+  border-radius: 12px;
+  padding: 0.78rem 0.94rem;
+  background:
+    linear-gradient(145deg, #d79a3a, #bf7c23),
+    var(--azuma-accent);
+  color: #16100b;
   font-weight: 700;
+  letter-spacing: 0.02em;
   cursor: pointer;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
 }
 
-.azuma-auth-form button:disabled {
-  opacity: 0.6;
+.azuma-auth-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(151, 90, 11, 0.3);
+  filter: saturate(1.06);
+}
+
+.azuma-auth-submit:disabled {
+  opacity: 0.62;
   cursor: not-allowed;
 }
 
 .azuma-auth-back-link {
   display: inline-block;
-  margin-top: 0.9rem;
+  margin-top: 1rem;
   text-decoration: none;
   color: var(--azuma-accent-dark);
   font-weight: 700;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.azuma-auth-back-link:hover {
+  color: #6e4917;
+  transform: translateX(-2px);
 }
 
 .azuma-auth-error {
   margin-top: 0.75rem;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 0.66rem 0.72rem;
   background: rgba(143, 47, 40, 0.12);
   border: 1px solid rgba(143, 47, 40, 0.32);
   color: #7d2b24;
   font-size: 0.9rem;
+}
+
+@keyframes azumaLanternFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes azumaSmokeMove {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, -18px) scale(1.08);
+  }
 }
 
 .azuma-admin-stats {
@@ -867,6 +1120,15 @@
 }
 
 @media (max-width: 980px) {
+  .azuma-auth-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .azuma-lantern {
+    width: 48px;
+    height: 120px;
+  }
+
   .azuma-admin-panel {
     grid-template-columns: 1fr;
   }
@@ -880,6 +1142,31 @@
 
   .azuma-nav-links {
     justify-content: flex-start;
+  }
+
+  .azuma-auth-shell {
+    padding: 0.85rem;
+  }
+
+  .azuma-auth-story {
+    order: 2;
+  }
+
+  .azuma-auth-card {
+    order: 1;
+    width: 100%;
+  }
+
+  .azuma-auth-status {
+    gap: 0.35rem;
+  }
+
+  .azuma-lantern-left {
+    left: -10px;
+  }
+
+  .azuma-lantern-right {
+    right: -10px;
   }
 
   .azuma-admin-actions {
