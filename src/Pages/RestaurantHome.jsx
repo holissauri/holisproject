@@ -229,7 +229,7 @@ function RestaurantHome() {
 
       <section className="azuma-store-details" id="store-details">
         <div className="azuma-store-details-inner">
-          <h2>\u5e97\u8217\u60c5\u5831\uff08\u8a73\u7d30\uff09</h2>
+          <h2>{"\u5e97\u8217\u60c5\u5831\uff08\u8a73\u7d30\uff09"}</h2>
           {storeDetails.map((section) => (
             <div className="azuma-detail-group" key={section.id}>
               <h3 className="azuma-detail-group-title">{section.title}</h3>
@@ -246,7 +246,7 @@ function RestaurantHome() {
                       {Boolean(row.mapEmbed) && (
                         <div className="azuma-map-embed-wrap">
                           <iframe
-                            title="\u3042\u305a\u307e\u98df\u5802\u306e\u5730\u56f3"
+                            title={"\u3042\u305a\u307e\u98df\u5802\u306e\u5730\u56f3"}
                             src={STORE_MAP_EMBED_URL}
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
